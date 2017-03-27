@@ -1,0 +1,7 @@
+[user]
+	email = broemartino@gmail.com
+	name = Martin Lavoie
+[push]
+	default = simple
+[core]
+	editor = vim
