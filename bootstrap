@@ -1,22 +1,13 @@
 #! /usr/bin/env bash
 
-script_path = dirname $0
-run = "dotfiles -R $script_path -C $script_path/dotfilerc -s"
-used_nix_shell=0
+script_path=$(dirname $0)
 
-if command -v nix-shell; then
-    used_nix_shell=1
-    nix-shell '<nixpkgs>' -A python35Packages.dotfiles --run "$run"
+command -v dotfiles && command -v git 
+
+if (($? == 0)) ; then
+    dotfiles -R $script_path -C $script_path/dotfilesrc -s
+    git submodule update --init --recursive
+    dotfiles -s
 else
-    eval $run 
+    echo "There was a problem during bootstrap. dotfiles or git is missing"
 fi
-
-if [$? -eq 0]; then
-    $script_path/update
-else
-    echo "There was a problem with the execution of dotfiles."
-    if $used_nix_shell; then
-        echo "nix-shell was used."
-    fi
-fi
-
