@@ -4,5 +4,8 @@ ignore = [
     '.git',
     '.gitignore',
     '.gitmodules',
+    'bootstrap',
+    'update',
     '*.swp',
+    'vim_runtime',
     'oh-my-zsh' ]

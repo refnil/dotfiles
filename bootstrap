@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+script_path = dirname $0
+run = "dotfiles -R $script_path -C $script_path/dotfilerc -s"
+used_nix_shell=0
+
+if command -v nix-shell; then
+    used_nix_shell=1
+    nix-shell '<nixpkgs>' -A python35Packages.dotfiles --run "$run"
+else
+    eval $run 
+fi
+
+if [$? -eq 0]; then
+    $script_path/update
+else
+    echo "There was a problem with the execution of dotfiles."
+    if $used_nix_shell; then
+        echo "nix-shell was used."
+    fi
+fi
+
