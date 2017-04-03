@@ -21,6 +21,9 @@ export EDITOR='vim'
 alias tupm="tup monitor -f -a -j4"
 alias open="xdg-open"
 
+# Unset unwanted alias
+unalias ag
+
 export PYTHONSTARTUP=~/.pythonrc
 
 concat_path () {
