@@ -7,7 +7,6 @@ command -v dotfiles && command -v git
 if (($? == 0)) ; then
     dotfiles -R $script_path -C $script_path/dotfilesrc -s
     git submodule update --init --recursive
-    dotfiles -s
 else
     echo "There was a problem during bootstrap. dotfiles or git is missing"
 fi
