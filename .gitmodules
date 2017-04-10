@@ -4,3 +4,6 @@
 [submodule "vim_runtime"]
 	path = vim_runtime
 	url = git://github.com/refnil/vimrc.git
+[submodule "tmuxrc"]
+	path = tmuxrc
+	url = git://github.com/refnil/tmuxrc.git
