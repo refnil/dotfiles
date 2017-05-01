@@ -7,3 +7,6 @@
 [submodule "tmuxrc"]
 	path = tmuxrc
 	url = git://github.com/refnil/tmuxrc.git
+[submodule "vim_perso/vim-pony"]
+	path = vim_perso/vim-pony
+	url = git@github.com:jakwings/vim-pony.git

@@ -13,3 +13,6 @@ map <leader>c :exe '!xdg-open ' . shellescape(expand('%:p:s/tex/pdf/')) . ' >> /
 
 " Make syntastic use c++11
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+" Infect more
+call pathogen#infect(dotfilepath.'/vim_perso/{}')

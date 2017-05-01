@@ -7,5 +7,6 @@ ignore = [
     '*.swp',
     'bootstrap',
     'vim_runtime',
+    'vim_perso',
     'tmuxrc',
     'oh-my-zsh' ]
