@@ -10,3 +10,6 @@ execute "source ".vimawesome."/vimrcs/extended.vim"
 " Make <leader>c open the pdf of the current tex file
 au BufRead,BufNewFile *.cls set filetype=tex
 map <leader>c :exe '!xdg-open ' . shellescape(expand('%:p:s/tex/pdf/')) . ' >> /dev/null 2>> /dev/null'<esc><cr>
+
+" Make syntastic use c++11
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
