@@ -5,3 +5,10 @@
 	default = simple
 [core]
 	editor = vim
+
+[url "git@github.com:"]
+  insteadOf = gh:
+  insteadOf = ghub:
+  insteadOf = github:
+  insteadOf = https://github.com/
+  insteadOf = http://github.com/
