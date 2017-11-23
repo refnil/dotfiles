@@ -10,6 +10,7 @@ execute "source ".vimawesome."/vimrcs/extended.vim"
 " Make <leader>c open the pdf of the current tex file
 au BufRead,BufNewFile *.cls set filetype=tex
 au BufRead,BufNewFile *.intex set filetype=tex
+au BufRead,BufNewFile *.tikz set filetype=tex
 au BufRead,BufNewFile *.ftex set filetype=tex
 
 augroup filetype_tex
@@ -62,3 +63,9 @@ iunmap $3
 iunmap $4
 iunmap $q
 iunmap $e
+
+map <leader>ss :setlocal spell! spelllang=fr<cr>
+
+" Make possible to have project vimrc
+set exrc
+set secure
