@@ -2,6 +2,8 @@ let dotfilepath="~/dotfiles"
 let vimawesome=dotfilepath."/vim_runtime"
 execute "set runtimepath+=".vimawesome
 
+let maplocalleader='m'
+
 execute "source ".vimawesome."/vimrcs/basic.vim"
 execute "source ".vimawesome."/vimrcs/filetypes.vim"
 execute "source ".vimawesome."/vimrcs/plugins_config.vim"
@@ -65,7 +67,16 @@ iunmap $q
 iunmap $e
 
 map <leader>ss :setlocal spell! spelllang=fr<cr>
+set spellfile=~/.vim/spell/fr.utf-8.add
 
-" Make possible to have project vimrc
-set exrc
-set secure
+set conceallevel=2
+set concealcursor="nc"
+let g:tex_conceal="abdgm"
+
+
+" syntax on
+filetype on
+filetype plugin indent on
+" idirs-vim
+let g:idris_conceal=1
+
