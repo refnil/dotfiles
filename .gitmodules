@@ -10,3 +10,6 @@
 [submodule "vim_perso/vim-pony"]
 	path = vim_perso/vim-pony
 	url = git@github.com:jakwings/vim-pony.git
+[submodule "dircolors"]
+	path = dircolors
+	url = git@github.com:seebi/dircolors-solarized.git

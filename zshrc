@@ -42,3 +42,4 @@ then
     export PATH="$BIN_HOME_PATH:$PATH"
 fi
 
+eval `dircolors ~/dotfiles/dircolors/dircolors.256dark`
