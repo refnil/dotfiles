@@ -53,11 +53,11 @@ let s:left = get(s:active, 'left', [])
 
 let s:left = s:left + [ ['tup'] ]
 let s:active.left = s:left
-let g:lightline.active = s:active
+" let g:lightline.active = s:active
 
 let s:comp_function = get(g:lightline, 'component_function', {})
 let s:comp_function.tup = 'GetTupStatus'
-let g:lightline.component_function = s:comp_function
+" let g:lightline.component_function = s:comp_function
 
 iunmap $1
 iunmap $2
