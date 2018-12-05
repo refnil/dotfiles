@@ -18,12 +18,13 @@ with pkgs;
     # steam
     bat # "Better" cat
     nix-top # Explore running nix build
+    bup
+    python36Packages.glances
   ];
 
   xsession.enable = true;
   xsession.windowManager.i3 = {
       enable = true;
-      package = i3-gaps;
       config = rec { 
           modifier = "Mod4";
           keybindings = lib.mkOptionDefault {
