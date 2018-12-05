@@ -4,6 +4,7 @@ with pkgs;
   imports = [ ./home-bootstrap.nix ];
 
   nixpkgs.config.allowUnfree = true;
+  #nixpkgs.overlays = [ import ./unstable-overlay.nix ];
 
   home.packages = [
     git
@@ -15,12 +16,15 @@ with pkgs;
     xdotool
     libreoffice
     calibre
-    # steam
+    #steam
     bat # "Better" cat
     nix-top # Explore running nix build
     bup
     python3Full
     python36Packages.glances
+    mosh
+    tmate
+    qutebrowser
   ];
 
   xsession.enable = true;
@@ -62,7 +66,6 @@ with pkgs;
   };
 
   programs.feh.enable = true;
-  programs.firefox.enable = true;
   programs.git = {
       enable = true;
       userName = "Martin Lavoie";
