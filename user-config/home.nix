@@ -1,10 +1,8 @@
 { pkgs, options, ...}:
 with pkgs;
-let 
-	base16 = callPackage ~/projets/base16-nix {};
-	colorScheme = base16.colorBuilder base16.schemes.circus;
-in
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = [
     unzip
     ripgrep
@@ -13,7 +11,7 @@ in
     xdotool
     libreoffice
     calibre
-    steam
+    # steam
     bat # "Better" cat
     nix-top # Explore running nix build
   ];
@@ -44,15 +42,10 @@ in
 
   programs.pywal.enable = true;
 
-  programs.home-manager.enable = true;
-  programs.home-manager.path = "/home/refnil/contrib/home-manager";
-  #programs.home-manager.path = https://github.com/rycee/home-manager/archive/master.tar.gz;
-
   programs.fish = {
       enable = true;
       shellAliases = {
         "wall" = "wal -i ~/test/Wallpapers/GanstaAnimals";
-
       };
   };
 
@@ -102,5 +95,4 @@ in
 	  polybar bar/top &
 	'';
   };
-
-}
+} // import ./home-bootstrap.nix {inherit options pkgs;} 
