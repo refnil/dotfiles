@@ -1,9 +1,13 @@
 { pkgs, options, ...}:
 with pkgs;
 {
+  imports = [ ./home-bootstrap.nix ];
   nixpkgs.config.allowUnfree = true;
 
+  #nixpkgs.overlays = [ import ./unstable-overlay.nix ];
+
   home.packages = [
+    tmux
     unzip
     ripgrep
     evince 
@@ -40,7 +44,7 @@ with pkgs;
       #extraConfig = builtins.readFile "${colorScheme base16.templates.i3}/themes/base16-circus.config";
   };
 
-  programs.pywal.enable = true;
+  #programs.pywal.enable = true;
 
   programs.fish = {
       enable = true;
@@ -101,4 +105,4 @@ with pkgs;
     ".pythonrc".source = ./pythonrc;
     ".tmux.conf".source = ./tmuxrc/tmux.conf;
   };
-} // import ./home-bootstrap.nix {inherit options pkgs;} 
+} 
