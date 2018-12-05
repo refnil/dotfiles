@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ../hardware/overmind.nix
       ../base.nix
-      ../vfio.nix
+      # ../vfio.nix
 
       ../user/refnil.nix
     ];
