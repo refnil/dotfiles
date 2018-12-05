@@ -19,6 +19,7 @@ with pkgs;
     bat # "Better" cat
     nix-top # Explore running nix build
     bup
+    python3Full
     python36Packages.glances
   ];
 
