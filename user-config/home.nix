@@ -95,4 +95,10 @@ with pkgs;
 	  polybar bar/top &
 	'';
   };
+
+  home.file = {
+    ".vimrc".source = ./vimrc;
+    ".pythonrc".source = ./pythonrc;
+    ".tmux.conf".source = ./tmuxrc/tmux.conf;
+  };
 } // import ./home-bootstrap.nix {inherit options pkgs;} 
