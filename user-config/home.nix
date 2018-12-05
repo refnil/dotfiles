@@ -2,11 +2,11 @@
 with pkgs;
 {
   imports = [ ./home-bootstrap.nix ];
+
   nixpkgs.config.allowUnfree = true;
 
-  #nixpkgs.overlays = [ import ./unstable-overlay.nix ];
-
   home.packages = [
+    git
     tmux
     unzip
     ripgrep
@@ -73,9 +73,26 @@ with pkgs;
   programs.termite.enable = true;
 
   programs.neovim = {
-      enable = true;
+      enable = false;
       viAlias = true;
       vimAlias = true;
+  };
+
+  programs.vim = {
+    enable = true;
+    settings = {
+      relativenumber = true;
+      number = true;
+      expandtab = true;
+      tabstop = 4;
+    };
+    plugins = [
+      "idris-vim"
+      "vim-airline"
+      "The_NERD_tree" # file system explorer
+      "fugitive" "vim-gitgutter" # git 
+      "ctrlp"
+    ];
   };
 
   services.redshift = {
@@ -101,7 +118,7 @@ with pkgs;
   };
 
   home.file = {
-    ".vimrc".source = ./vimrc;
+    #".config/nvim/init.vim".source = ./vimrc;
     ".pythonrc".source = ./pythonrc;
     ".tmux.conf".source = ./tmuxrc/tmux.conf;
   };
