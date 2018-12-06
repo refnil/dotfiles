@@ -92,6 +92,7 @@ with pkgs;
       tabstop = 4;
     };
     plugins = [
+      #"vim-fish"
       "idris-vim"
       "vim-airline"
       "The_NERD_tree" # file system explorer

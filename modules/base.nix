@@ -8,13 +8,20 @@
   imports = [ ];
   
   # Set your time zone.
-  time.timeZone = "America/Toronto";
+  time.timeZone = "America/New_York";
 
   # Enable the OpenSSH daemon.
   services.openssh = {
   	enable = true;
 	forwardX11 = true;
   };
+
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+  system.autoUpgrade.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

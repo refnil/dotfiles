@@ -20,10 +20,6 @@
   
   networking.hostName = "overmind"; # Define your hostname.
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   # services.xserver.layout = "us";
