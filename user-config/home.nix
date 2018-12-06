@@ -32,7 +32,7 @@ with pkgs;
       enable = true;
       config = rec { 
           modifier = "Mod4";
-          keybindings = lib.mkOptionDefault {
+          keybindings = lib.mkForce {
             "${modifier}+Return" = "exec termite";
           };
           startup = [
