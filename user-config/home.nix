@@ -35,7 +35,7 @@ in
       enable = true;
       config = rec { 
           modifier = "Mod4";
-          keybindings = lib.mkForce {
+          keybindings = lib.mkOptionDefault {
             "${modifier}+Return" = "exec termite";
             "${modifier}+Shift+e" = "exec xfce4-session-logout";
           };
