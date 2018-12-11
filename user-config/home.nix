@@ -69,6 +69,7 @@ in
   programs.direnv = {
       enable = true;
       enableFishIntegration = true;
+      stdlib = builtins.readFile ./direnvrc;
   };
 
   programs.feh.enable = true;
