@@ -59,6 +59,4 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   nixpkgs.config.allowUnfree = true;
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
 }

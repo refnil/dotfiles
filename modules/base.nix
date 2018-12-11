@@ -46,4 +46,6 @@
   system.stateVersion = "18.09"; # Did you read the comment?
 
   nixpkgs.config.allowUnfree = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
 }
