@@ -1,9 +1,12 @@
 { pkgs, options, ...}:
 with pkgs;
+let 
+  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
+in
 {
   imports = [ ./home-bootstrap.nix ];
 
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
   #nixpkgs.overlays = [ import ./unstable-overlay.nix ];
 
   home.packages = [
@@ -16,7 +19,7 @@ with pkgs;
     xdotool
     libreoffice
     calibre
-    #steam
+    unstable.steam
     bat # "Better" cat
     nix-top # Explore running nix build
     bup
@@ -27,13 +30,14 @@ with pkgs;
     qutebrowser
   ];
 
-  xsession.enable = true;
+  #xsession.enable = true;
   xsession.windowManager.i3 = {
       enable = true;
       config = rec { 
           modifier = "Mod4";
           keybindings = lib.mkForce {
             "${modifier}+Return" = "exec termite";
+            "${modifier}+Shift+e" = "exec xfce4-session-logout";
           };
           startup = [
 	    #{ command = "systemctl --user restart polybar"; always = true; notification = false; }
@@ -41,10 +45,12 @@ with pkgs;
             { command = ''setxkbmap -model pc104 -layout us,ca -option grp:alt_shift_toggle''; always = true; }
             { command = ''wal -R''; always = true; }
           ];
+          /*
 	  gaps = {
 	  	inner = 8;
 		outer = 3;
 	  };
+      */
 	  #bars = [];
       };
       #extraConfig = builtins.readFile "${colorScheme base16.templates.i3}/themes/base16-circus.config";
