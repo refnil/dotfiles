@@ -25,13 +25,15 @@
   hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+  };
+
   # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
   users.extraUsers.refnil.extraGroups = [ "wheel" ];

@@ -16,9 +16,29 @@
 	forwardX11 = true;
   };
 
+  services.xserver = {
+    enable = true;   
+
+   # displayManager.sddm.enable = true;
+    #videoDrivers = [ "nvidia" ];
+    desktopManager = {
+      default = "xfce";
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
+
+    windowManager.i3.enable = true;
+  };
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "18.09"; # Did you read the comment?
+
+  nixpkgs.config.allowUnfree = true;
 }
