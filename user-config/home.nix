@@ -133,5 +133,7 @@ in
     #".config/nvim/init.vim".source = ./vimrc;
     ".pythonrc".source = ./pythonrc;
     ".tmux.conf".source = ./tmuxrc/tmux.conf;
+
+    ".config/fish/functions".source = ./fish/functions;
   };
 } 
