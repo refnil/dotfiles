@@ -28,6 +28,7 @@ in
     mosh
     tmate
     qutebrowser
+    pass
   ];
 
   #xsession.enable = true;
