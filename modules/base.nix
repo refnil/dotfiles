@@ -24,7 +24,7 @@
   services.xserver = {
     enable = true;   
 
-   # displayManager.sddm.enable = true;
+    displayManager.sddm.enable = true;
     #videoDrivers = [ "nvidia" ];
     desktopManager = {
       default = "xfce";
