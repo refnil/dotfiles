@@ -29,6 +29,8 @@ in
     tmate
     qutebrowser
     pass
+    tomb
+    firefox
   ];
 
   #xsession.enable = true;
