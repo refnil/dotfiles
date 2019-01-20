@@ -1,4 +1,4 @@
-let dotfilepath="~/dotfiles"
+let dotfilepath="~/dotfiles/user-config"
 let vimawesome=dotfilepath."/vim_runtime"
 execute "set runtimepath+=".vimawesome
 

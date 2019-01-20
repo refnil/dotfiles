@@ -27,13 +27,7 @@
     displayManager.sddm.enable = true;
     #videoDrivers = [ "nvidia" ];
     desktopManager = {
-      default = "xfce";
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
+      plasma5.enable = true;
     };
 
     windowManager.i3.enable = true;
