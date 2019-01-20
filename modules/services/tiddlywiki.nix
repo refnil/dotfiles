@@ -21,6 +21,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [ cfg.httpPort ];
     systemd.services.tiddlywiki = {
       wantedBy = [ "multi-user.target" ];
       serviceConfig.ExecStart = let ExecStart = pkgs.writeText "tiddlywiki_start" ''
