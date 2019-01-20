@@ -12,6 +12,7 @@
       # ../vfio.nix
 
       ../user/refnil.nix
+      ../services/tiddlywiki.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -33,4 +34,10 @@
 
   # Set group for sudoers
   users.extraUsers.refnil.extraGroups = [ "wheel" ];
+
+  services.tiddlywiki = {
+    enable = true;
+    path = "/home/refnil/workbench/tiddlywiki/wiki_test";
+    listenAddress = "0.0.0.0";
+  };
 }
