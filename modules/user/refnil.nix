@@ -9,6 +9,9 @@
   users.users.refnil = {
     isNormalUser = true;
     shell = pkgs.fish;
+    openssh.authorizedKeys.keyFiles = [
+      ./refnil_pub_keys/id_overmind.pub
+    ];
   };
 
 }
