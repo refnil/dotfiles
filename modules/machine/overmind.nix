@@ -12,6 +12,8 @@
       # ../vfio.nix
 
       ../user/refnil.nix
+      ../user/mlapointe.nix
+
       ../services/tiddlywiki.nix
     ];
 
