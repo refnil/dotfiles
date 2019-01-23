@@ -10,6 +10,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
+      ./mlapointe_pub_keys/aiur.pub
     ];
   };
 
