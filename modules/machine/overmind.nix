@@ -15,6 +15,7 @@
       ../user/mlapointe.nix
 
       ../services/tiddlywiki.nix
+      ../services/sage.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -39,7 +40,15 @@
 
   services.tiddlywiki = {
     enable = true;
-    path = "/home/refnil/workbench/tiddlywiki/wiki_test";
+    path = "/data/tiddlywiki";
     listenAddress = "0.0.0.0";
+    httpPort = 30001;
+  };
+
+  services.sage = {
+    enable = true;
+    path = "/data/sage";
+    listenAddress = "0.0.0.0";
+    httpPort = 30002;
   };
 }

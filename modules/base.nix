@@ -14,6 +14,8 @@
   services.openssh = {
   	enable = true;
 	forwardX11 = true;
+    permitRootLogin = "no";
+    passwordAuthentication = false;
   };
 
   sound.enable = true;
