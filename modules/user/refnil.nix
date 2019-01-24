@@ -11,6 +11,7 @@
     shell = pkgs.fish;
     openssh.authorizedKeys.keyFiles = [
       ./refnil_pub_keys/id_overmind.pub
+      ./refnil_pub_keys/id_saladin.pub
     ];
   };
 
