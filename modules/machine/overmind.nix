@@ -51,4 +51,10 @@
     httpPort = 30002;
     package = pkgs.unstable.sage;
   };
+
+  services.gitea = {
+    enable = true;
+    httpPort = 30004;
+    stateDir = "/data/gitea";
+  };
 }
