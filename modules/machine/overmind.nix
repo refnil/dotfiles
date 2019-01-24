@@ -57,4 +57,11 @@
     httpPort = 30004;
     stateDir = "/data/gitea";
   };
+
+  services.mattermost = {
+    enable = true;
+    statePath = "/data/mattermost";
+    siteUrl = "http://localhost:30003";
+    listenAddress = ":30003";
+  };
 }
