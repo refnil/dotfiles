@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -50,5 +49,6 @@
     path = "/data/sage";
     listenAddress = "0.0.0.0";
     httpPort = 30002;
+    package = pkgs.unstable.sage;
   };
 }

@@ -24,6 +24,11 @@ in {
       type = types.string;
       default = "sage";
     };
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.sage;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,7 +39,7 @@ in {
           mkdir -p ${cfg.path}/home ${cfg.path}/jupyter
           chown sage ${cfg.path}/home ${cfg.path}/jupyter
 
-          ${pkgs.sudo}/bin/sudo -H -u sage ${pkgs.sage}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter
+          ${pkgs.sudo}/bin/sudo -H -u sage ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter
          '';
       in "${pkgs.bash}/bin/bash ${ExecStart}";
     };
