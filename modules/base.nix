@@ -4,6 +4,12 @@
 
 { config, pkgs, ... }:
 
+let unstableTarball = builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/d34f44db4508cdcce96382cb80bd11fbe9c7d614.tar.gz";
+      sha256 = "0mi032xs1jsak93wa7bqa6z2ingz91z0g2ncc2g9mb754mpxp6xb";
+    };
+in
+
 {
   imports = [ ];
   
@@ -41,7 +47,15 @@
   # should.
   system.stateVersion = "18.09"; # Did you read the comment?
 
-  nixpkgs.config.allowUnfree = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
 }
