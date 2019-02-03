@@ -27,10 +27,12 @@ in
     python36Packages.glances
     mosh
     tmate
-    qutebrowser
     pass
     tomb
+    qutebrowser
     firefox
+    #brave
+    palemoon
   ];
 
   #xsession.enable = true;
