@@ -33,6 +33,7 @@ in
     firefox
     #brave
     palemoon
+    nox # pull request review for nixos
   ];
 
   #xsession.enable = true;
