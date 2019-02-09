@@ -57,6 +57,7 @@ in
 
   nixpkgs.config = {
     allowUnfree = true;
+    useSandbox = true;
     packageOverrides = pkgs: {
       unstable = import unstableTarball {
         config = config.nixpkgs.config;
