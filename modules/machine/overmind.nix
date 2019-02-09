@@ -64,4 +64,13 @@
     siteUrl = "http://localhost:30003";
     listenAddress = ":30003";
   };
+
+  services.hydra = {
+    enable = true;
+    hydraURL = "localhost:30005";
+    port = 30005;
+    notificationSender = "none@localhost.local";
+    buildMachinesFiles = [];
+    useSubstitutes = true;
+  };
 }
