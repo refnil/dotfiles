@@ -73,4 +73,7 @@
     buildMachinesFiles = [];
     useSubstitutes = true;
   };
+
+  # Civ 6 ports
+  #networking.firewall.allowedUDPPorts = [62056 62901];
 }
