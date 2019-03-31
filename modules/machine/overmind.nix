@@ -74,6 +74,15 @@
     useSubstitutes = true;
   };
 
+  services.factorio = {
+     enable = false;
+     stateDir = "/data/factorio";
+     game-name = "factorio";
+     lan = true;
+     autosave-interval = 5;
+  };
+
   # Civ 6 ports
-  #networking.firewall.allowedUDPPorts = [62056 62901];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedUDPPorts = [ 62056 62900 62901 34197];
 }

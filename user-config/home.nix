@@ -136,6 +136,10 @@ in
 	'';
   };
 
+  home.sessionVariables = {
+    EDITOR = "vim";
+  };
+
   home.file = {
     #".config/nvim/init.vim".source = ./vimrc;
     ".pythonrc".source = ./pythonrc;
