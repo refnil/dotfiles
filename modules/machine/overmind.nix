@@ -82,7 +82,18 @@
      autosave-interval = 5;
   };
 
-  # Civ 6 ports
-  networking.firewall.allowedTCPPorts = [ 8080 ];
-  networking.firewall.allowedUDPPorts = [ 62056 62900 62901 34197];
+  networking.firewall.allowedTCPPorts = [ 
+    8080 
+
+    #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
+    27036 27037 #27015
+  ];
+
+  networking.firewall.allowedUDPPorts = [ 
+    # Civ 6 ports
+    62056 62900 62901 34197
+
+    #Steam link
+    27031 27036 #27015
+  ];
 }
