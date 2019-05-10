@@ -73,8 +73,14 @@ in
       relativenumber = true;
       number = true;
       expandtab = true;
-      tabstop = 4;
+      tabstop = 8;
+      shiftwidth = 4;
     };
+    extraConfig = ''
+      set softtabstop=0 smarttab 
+      nnoremap <S-Tab> <<
+      inoremap <S-Tab> <C-d>
+    '';
     plugins = [
       #"vim-fish"
       "idris-vim"
@@ -82,6 +88,7 @@ in
       "The_NERD_tree" # file system explorer
       "fugitive" "vim-gitgutter" # git 
       "ctrlp"
+      "haskell-vim"
     ];
   };
 
