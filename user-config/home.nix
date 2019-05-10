@@ -6,9 +6,6 @@ in
 {
   imports = [ ./home-bootstrap.nix ];
 
-  #nixpkgs.config.allowUnfree = true;
-  #nixpkgs.overlays = [ import ./unstable-overlay.nix ];
-
   home.packages = [
     git
     tmux
@@ -36,32 +33,6 @@ in
     nox # pull request review for nixos
   ];
 
-  #xsession.enable = true;
-  xsession.windowManager.i3 = {
-      enable = false;
-      config = rec { 
-          modifier = "Mod4";
-          keybindings = lib.mkOptionDefault {
-            "${modifier}+Return" = "exec termite";
-            "${modifier}+Shift+e" = "exec xfce4-session-logout";
-          };
-          startup = [
-	    #{ command = "systemctl --user restart polybar"; always = true; notification = false; }
-            { command = ''xsetroot -solid "#000000"''; always = true; }
-            { command = ''setxkbmap -model pc104 -layout us,ca -option grp:alt_shift_toggle''; always = true; }
-            { command = ''wal -R''; always = true; }
-          ];
-          /*
-	  gaps = {
-	  	inner = 8;
-		outer = 3;
-	  };
-      */
-	  #bars = [];
-      };
-      #extraConfig = builtins.readFile "${colorScheme base16.templates.i3}/themes/base16-circus.config";
-  };
-
   #programs.pywal.enable = true;
 
   programs.fish = {
@@ -75,7 +46,7 @@ in
   programs.direnv = {
       enable = true;
       enableFishIntegration = true;
-      stdlib = builtins.readFile ./direnvrc;
+      stdlib = builtins.readFile ./rcfiles/direnvrc;
   };
 
   programs.feh.enable = true;
@@ -120,8 +91,6 @@ in
       longitude = "73.5";
   };
 
-  #services.network-manager-applet.enable = true;
-
   services.screen-locker = {
       enable = true;
       inactiveInterval = 5;
@@ -141,10 +110,7 @@ in
   };
 
   home.file = {
-    #".config/nvim/init.vim".source = ./vimrc;
-    ".pythonrc".source = ./pythonrc;
+    ".pythonrc".source = ./rcfiles/pythonrc;
     ".tmux.conf".source = ./tmuxrc/tmux.conf;
-
-    ".config/fish/functions".source = ./fish/functions;
   };
 } 
