@@ -36,21 +36,18 @@ in
 
   services.xserver = {
     enable = true;   
-
-    displayManager.sddm.enable = true;
-    #videoDrivers = [ "nvidia" ];
-    desktopManager = {
-      plasma5.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = false;
     };
-
-    windowManager.i3.enable = true;
+    desktopManager.gnome3.enable = true;
   };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.09"; # Did you read the comment?
+  system.stateVersion = "19.03"; # Did you read the comment?
 
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
