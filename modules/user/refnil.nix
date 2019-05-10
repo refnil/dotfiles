@@ -13,7 +13,7 @@
       ./refnil_pub_keys/id_overmind.pub
       ./refnil_pub_keys/id_cerebrate.pub
       ./refnil_pub_keys/id_saladin.pub
+      ./refnil_pub_keys/id_aiur.pub
     ];
   };
-
 }
