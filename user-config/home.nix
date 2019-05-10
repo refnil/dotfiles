@@ -2,6 +2,11 @@
 with pkgs;
 let 
   unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
+  kalbasit-nur-packages = import (
+    builtins.fetchTarball {
+      url = "https://github.com/kalbasit/nur-packages/archive/e64b81d6e177809d2f8d9669373a9eb619972dea.tar.gz";
+      sha256 = "0jz5hclsc0xd2w8nf56hy3acm65cmhzg8xla26qdsvkis9pw7s5x";
+    }) { pkgs = pkgs; };
 in
 {
   imports = [ ./home-bootstrap.nix ];
@@ -31,6 +36,7 @@ in
     #brave
     palemoon
     nox # pull request review for nixos
+    kalbasit-nur-packages.nixify 
   ];
 
   #programs.pywal.enable = true;
@@ -46,7 +52,6 @@ in
   programs.direnv = {
       enable = true;
       enableFishIntegration = true;
-      stdlib = builtins.readFile ./rcfiles/direnvrc;
   };
 
   programs.feh.enable = true;
