@@ -38,7 +38,7 @@ in
 
   #xsession.enable = true;
   xsession.windowManager.i3 = {
-      enable = true;
+      enable = false;
       config = rec { 
           modifier = "Mod4";
           keybindings = lib.mkOptionDefault {
@@ -115,12 +115,12 @@ in
   };
 
   services.redshift = {
-      enable = true;
+      enable = false;
       latitude = "45.5";
       longitude = "73.5";
   };
 
-  services.network-manager-applet.enable = true;
+  #services.network-manager-applet.enable = true;
 
   services.screen-locker = {
       enable = true;
