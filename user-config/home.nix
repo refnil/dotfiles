@@ -2,11 +2,12 @@
 with pkgs;
 let 
   unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
-  kalbasit-nur-packages = import (
-    builtins.fetchTarball {
-      url = "https://github.com/kalbasit/nur-packages/archive/e64b81d6e177809d2f8d9669373a9eb619972dea.tar.gz";
-      sha256 = "0jz5hclsc0xd2w8nf56hy3acm65cmhzg8xla26qdsvkis9pw7s5x";
-    }) { pkgs = pkgs; };
+  nur = import (builtins.fetchTarball {
+    # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
+    url = "https://github.com/nix-community/NUR/archive/488e99b6a5cb639b10ba0d82ec9788dfe2a57d5d.tar.gz";
+    # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
+    sha256 = "1mnavmx93wpqjrgzpk4bkb67hlks532kya18j5li7va26v8lpqkz";
+  }) {pkgs = pkgs;};
 in
 {
   imports = [ ./home-bootstrap.nix ];
@@ -32,11 +33,10 @@ in
     pass
     tomb
     qutebrowser
-    firefox
     #brave
     palemoon
     nox # pull request review for nixos
-    kalbasit-nur-packages.nixify 
+    nur.repos.kalbasit.nixify 
   ];
 
   #programs.pywal.enable = true;
@@ -66,10 +66,17 @@ in
   programs.ssh.enable = true;
   programs.termite.enable = true;
 
-  programs.neovim = {
-      enable = false;
-      viAlias = true;
-      vimAlias = true;
+  programs.firefox = {
+
+    enable = true;
+    extensions = with nur.repos.rycee.firefox-addons; [
+      ublock-origin
+      https-everywhere
+      decentraleyes
+      link-cleaner
+      octotree
+      privacy-badger
+    ];
   };
 
   programs.vim = {
@@ -95,18 +102,6 @@ in
       "ctrlp"
       "haskell-vim"
     ];
-  };
-
-  services.redshift = {
-      enable = false;
-      latitude = "45.5";
-      longitude = "73.5";
-  };
-
-  services.screen-locker = {
-      enable = true;
-      inactiveInterval = 5;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
   };
 
   services.polybar = {
