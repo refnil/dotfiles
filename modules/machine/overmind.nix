@@ -83,6 +83,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 
+    8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     8080 
 
     #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711

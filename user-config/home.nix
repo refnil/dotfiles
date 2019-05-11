@@ -7,7 +7,7 @@ let
     url = "https://github.com/nix-community/NUR/archive/488e99b6a5cb639b10ba0d82ec9788dfe2a57d5d.tar.gz";
     # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
     sha256 = "1mnavmx93wpqjrgzpk4bkb67hlks532kya18j5li7va26v8lpqkz";
-  }) {pkgs = pkgs;};
+  }) { pkgs = unstable; };
 in
 {
   imports = [ ./home-bootstrap.nix ];
@@ -37,6 +37,7 @@ in
     palemoon
     nox # pull request review for nixos
     nur.repos.kalbasit.nixify 
+    unstable.vlc
   ];
 
   #programs.pywal.enable = true;
