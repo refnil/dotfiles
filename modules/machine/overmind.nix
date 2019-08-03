@@ -3,6 +3,14 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+let kaleidoscope_src = pkgs.fetchFromGitHub{
+    owner = "keyboardio";
+    repo = "kaleidoscope";
+    rev = "f6d2e62649246173a0f11f647159a0cb7e1f1624";
+    sha256 = "0vxis627cbkyzd3883slcc16pfp2sc8bfx6gap4092zi29jajg3d";
+  };
+
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -35,7 +43,7 @@
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" ];
 
   services.tiddlywiki = {
     enable = true;
@@ -97,4 +105,8 @@
     #Steam link
     27031 27036 #27015
   ];
+
+  services.udev = {
+    extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
+  };
 }
