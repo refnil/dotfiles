@@ -8,6 +8,7 @@ let
     # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
     sha256 = "1mnavmx93wpqjrgzpk4bkb67hlks532kya18j5li7va26v8lpqkz";
   }) { pkgs = unstable; };
+  niv-repo = import (fetchTarball https://github.com/nmattia/niv/tarball/master) {};
 in
 {
   imports = [ ./home-bootstrap.nix ];
@@ -34,10 +35,11 @@ in
     tomb
     qutebrowser
     #brave
-    palemoon
+    #palemoon
     nox # pull request review for nixos
     nur.repos.kalbasit.nixify 
     unstable.vlc
+    niv-repo.niv
   ];
 
   #programs.pywal.enable = true;
