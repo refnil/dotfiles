@@ -109,4 +109,15 @@ in
   services.udev = {
     extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
   };
+
+  # Pour faire marcher diablo 3
+  systemd.extraConfig = ''
+    DefaultLimitNOFILE=524288
+  '';
+
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=524288
+  '';
+
+
 }

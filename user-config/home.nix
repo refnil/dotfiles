@@ -40,6 +40,7 @@ in
     nur.repos.kalbasit.nixify 
     unstable.vlc
     niv-repo.niv
+    unstable.lutris
   ];
 
   #programs.pywal.enable = true;
