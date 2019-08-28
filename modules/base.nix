@@ -61,4 +61,5 @@ in
       };
     };
   };
+  boot.supportedFilesystems = [ "ntfs" ];
 }
