@@ -119,6 +119,7 @@ in
     DefaultLimitNOFILE=524288
   '';
 
+  virtualisation.docker.enable = true;
 
   services.grafana = {
     enable = true;
