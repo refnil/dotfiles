@@ -98,14 +98,15 @@ in
       nnoremap <S-Tab> <<
       inoremap <S-Tab> <C-d>
     '';
-    plugins = [
-      #"vim-fish"
-      "idris-vim"
-      "vim-airline"
-      "The_NERD_tree" # file system explorer
-      "fugitive" "vim-gitgutter" # git 
-      "ctrlp"
-      "haskell-vim"
+    plugins = with vimPlugins; [
+      # vim-fish
+      idris-vim
+      vim-airline
+      The_NERD_tree # file system explorer
+      fugitive 
+      vim-gitgutter # git 
+      ctrlp
+      haskell-vim
     ];
   };
 
