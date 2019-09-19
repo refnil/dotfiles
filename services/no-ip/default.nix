@@ -19,7 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.no-ip = {
       wantedBy = [ "multi-user.target" ];
-      scripts = ''
+      script = ''
         ${cfg.package + /bin/bash} -C ${cfg.config-file}
       '';
       serviceConfig = {

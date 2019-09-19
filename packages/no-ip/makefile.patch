@@ -1,0 +1,15 @@
+diff --git a/Makefile b/Makefile
+index 8a8c074..87adc8f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -26,10 +26,7 @@ ${TGT}: Makefile ${TGT}.c
+ 
+ install: ${TGT} 
+ 	if [ ! -d ${BINDIR} ]; then mkdir -p ${BINDIR};fi
+-	if [ ! -d ${CONFDIR} ]; then mkdir -p ${CONFDIR};fi
+ 	cp ${TGT} ${BINDIR}/${TGT}
+-	${BINDIR}/${TGT} -C -c /tmp/no-ip2.conf
+-	mv /tmp/no-ip2.conf ${CONFDIR}/no-ip2.conf
+ 
+ package: ${TGT}
+ 	rm  -f *.bak

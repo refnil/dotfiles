@@ -12,6 +12,8 @@ let
     sha256 = "0vxis627cbkyzd3883slcc16pfp2sc8bfx6gap4092zi29jajg3d";
   };
 
+  no-ip = pkgs.callPackage ../../packages/no-ip {};
+
 in
 {
   imports =
@@ -26,6 +28,7 @@ in
 
       ../../services/tiddlywiki
       ../../services/sage
+      ../../services/no-ip
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -91,6 +94,13 @@ in
      game-name = "factorio";
      lan = true;
      autosave-interval = 5;
+  };
+
+  services.no-ip = {
+    enable = true;
+
+    config-file = toString ./no-ip.conf;
+    package = no-ip;
   };
 
   networking.firewall.allowedTCPPorts = [ 
