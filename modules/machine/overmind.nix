@@ -120,4 +120,8 @@ in
   '';
 
 
+  services.grafana = {
+    enable = true;
+    port = 30006;
+  };
 }
