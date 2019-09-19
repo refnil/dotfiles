@@ -41,7 +41,7 @@ in
     unstable.vlc
     niv-repo.niv
     unstable.lutris
-    discord
+    unstable.discord
   ];
 
   #programs.pywal.enable = true;
