@@ -99,7 +99,7 @@ in
   services.no-ip = {
     enable = true;
 
-    config-file = toString ./no-ip.conf;
+    config-file = "/data/no-ip/no-ip.conf";
     package = no-ip;
   };
 

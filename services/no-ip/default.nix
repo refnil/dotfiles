@@ -20,10 +20,11 @@ in {
     systemd.services.no-ip = {
       wantedBy = [ "multi-user.target" ];
       script = ''
-        ${cfg.package + /bin/bash} -C ${cfg.config-file}
+        ${cfg.package + /bin/noip2} -c ${cfg.config-file}
       '';
       serviceConfig = {
         User = "no-ip";
+        Type = "forking";
       };
     };
 
