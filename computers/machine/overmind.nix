@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let kaleidoscope_src = pkgs.fetchFromGitHub{
+let 
+  # For keyboardio
+  kaleidoscope_src = pkgs.fetchFromGitHub{
     owner = "keyboardio";
     repo = "kaleidoscope";
     rev = "f6d2e62649246173a0f11f647159a0cb7e1f1624";
@@ -13,16 +15,17 @@ let kaleidoscope_src = pkgs.fetchFromGitHub{
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ../hardware/overmind.nix
-      ../base.nix
-      # ../vfio.nix
+
+      ../common/base.nix
+      # ../common/vfio.nix
 
       ../user/refnil.nix
       ../user/mlapointe.nix
 
-      ../services/tiddlywiki.nix
-      ../services/sage.nix
+      ../../services/tiddlywiki
+      ../../services/sage
     ];
 
   # Use the systemd-boot EFI boot loader.

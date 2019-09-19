@@ -8,9 +8,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ../hardware/cerebrate.nix
-      ../user/refnil.nix
 
-      ../base.nix
+      ../common/base.nix
+
+      ../user/refnil.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
