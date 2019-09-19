@@ -1,12 +1,9 @@
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
-	url = git@github.com:robbyrussell/oh-my-zsh.git
-[submodule "vim_runtime"]
-	path = user-config/vim_runtime
+[submodule "home-folders/refnil/submodules/vimrc"]
+	path = home-folders/refnil/submodules/vimrc
 	url = git@github.com:refnil/vimrc.git
-[submodule "tmuxrc"]
-	path = user-config/tmuxrc
+[submodule "home-folders/refnil/submodules/tmuxrc"]
+	path = home-folders/refnil/submodules/tmuxrc
 	url = git@github.com:refnil/tmuxrc.git
-[submodule "vim_perso/vim-pony"]
-	path = user-config/vim_perso/vim-pony
+[submodule "home-folders/refnil/submodules/vim-pony"]
+	path = home-folders/refnil/submodules/vim-pony
 	url = git@github.com:jakwings/vim-pony.git

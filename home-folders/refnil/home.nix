@@ -123,6 +123,6 @@ in
 
   home.file = {
     ".pythonrc".source = ./rcfiles/pythonrc;
-    ".tmux.conf".source = ./tmuxrc/tmux.conf;
+    ".tmux.conf".source = ./submodules/tmuxrc/tmux.conf;
   };
 } 
