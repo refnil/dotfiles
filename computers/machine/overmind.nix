@@ -135,7 +135,14 @@ in
   virtualisation.docker.enable = true;
 
   services.grafana = {
-    enable = true;
+    enable = false;
     port = 30006;
+  };
+
+  networking.wireguard.interfaces.home = {
+    ips = [ "192.168.1.7/24" ];
+    privateKeyFile = "";
+
+
   };
 }
