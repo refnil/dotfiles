@@ -54,7 +54,7 @@ in
   services.tiddlywiki = {
     enable = true;
     path = "/data/tiddlywiki";
-    listenAddress = "0.0.0.0";
+    listenAddress = "127.0.0.1";
     httpPort = 30001;
   };
 
@@ -80,7 +80,7 @@ in
   };
 
   services.hydra = {
-    enable = true;
+    enable = false;
     hydraURL = "localhost:30005";
     port = 30005;
     notificationSender = "none@localhost.local";
@@ -104,6 +104,8 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 
+    443
+
     8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     8080 
 
@@ -137,5 +139,43 @@ in
   services.grafana = {
     enable = true;
     port = 30006;
+  };
+
+  services.nginx = 
+  let
+     makeHosts = name: port: 
+     let
+       locations."/" = {
+         proxyPass = "http://localhost:${toString port}/";
+         proxyWebsockets = true;
+       };
+     in
+     {
+       "${name}.localhost" = {
+         inherit locations;
+       };
+       /*
+       "${name}.refnil.ca" = {
+         onlySSL = true;
+         enableACME = true;
+         inherit locations;
+       };
+       */
+     };
+  in 
+  {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
+    virtualHosts = with builtins; foldl' (o1: o2: o1 // o2) {} [
+      (makeHosts "wiki" 30001)
+      (makeHosts "sage" 30002)
+      (makeHosts "chat" 30003)
+      (makeHosts "git" 30004)
+      (makeHosts "hydra" 30005)
+    ];
   };
 }
