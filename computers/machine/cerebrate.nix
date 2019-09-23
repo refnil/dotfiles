@@ -11,7 +11,7 @@
 
       ../common/base.nix
 
-      ../user/refnil.nix
+      ../../home-folders/refnil/user.nix
     ];
 
   # Use the systemd-boot EFI boot loader.

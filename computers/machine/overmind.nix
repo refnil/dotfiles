@@ -23,8 +23,8 @@ in
       ../common/base.nix
       # ../common/vfio.nix
 
-      ../user/refnil.nix
-      ../user/mlapointe.nix
+      ../../home-folders/refnil/user.nix
+      ../../home-folders/mlapointe/user.nix
 
       ../../services/tiddlywiki
       ../../services/sage

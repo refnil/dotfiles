@@ -5,15 +5,13 @@
 { config, pkgs, ... }:
 
 {
-  programs.fish.enable = true;
-  users.users.refnil = {
+  programs.zsh.enable = true;
+  users.users.mlapointe= {
     isNormalUser = true;
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
-      ./refnil_pub_keys/id_overmind.pub
-      ./refnil_pub_keys/id_cerebrate.pub
-      ./refnil_pub_keys/id_saladin.pub
-      ./refnil_pub_keys/id_aiur.pub
+      ./pub_keys/aiur.pub
     ];
   };
+
 }
