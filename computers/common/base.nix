@@ -62,4 +62,6 @@ in
     };
   };
   boot.supportedFilesystems = [ "ntfs" ];
+  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
 }
