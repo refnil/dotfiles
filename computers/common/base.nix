@@ -1,18 +1,5 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
-let unstableTarball = builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/d34f44db4508cdcce96382cb80bd11fbe9c7d614.tar.gz";
-      sha256 = "0mi032xs1jsak93wa7bqa6z2ingz91z0g2ncc2g9mb754mpxp6xb";
-    };
-in
-
+{ config, pkgs, options, ... }:
 {
-  imports = [ ];
-
   fonts.fonts = [
     pkgs.corefonts
 
@@ -52,15 +39,24 @@ in
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    useSandbox = true;
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
+  # Without any `nix.nixPath` entry:
+  nix.nixPath =
+    # Prepend default nixPath values.
+    options.nix.nixPath.default ++ 
+    # Append our nixpkgs-overlays.
+    [ "nixpkgs-overlays=${./overlay-compat}" ]
+  ;
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      useSandbox = true;
     };
+    overlays = [
+      (import ./unstable.nix)
+    ];
   };
+
   boot.supportedFilesystems = [ "ntfs" ];
   boot.cleanTmpDir = true;
   boot.tmpOnTmpfs = true;
