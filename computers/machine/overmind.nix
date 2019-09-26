@@ -141,6 +141,16 @@ in
     port = 30006;
   };
 
+  /*
+  // https://unix.stackexchange.com/questions/421325/wake-on-lan-via-ssh
+  services.wakeonlan.interfaces = [
+    {
+      interface = "enp3s0";
+      method = "unicast";
+    }
+  ];
+  */
+
   services.nginx = 
   let
      makeHosts = name: port: 
@@ -175,7 +185,7 @@ in
       (makeHosts "sage" 30002)
       (makeHosts "chat" 30003)
       (makeHosts "git" 30004)
-      (makeHosts "hydra" 30005)
+      #(makeHosts "hydra" 30005)
     ];
   };
 }
