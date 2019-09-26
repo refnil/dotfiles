@@ -42,6 +42,10 @@ in
     niv-repo.niv
     unstable.lutris
     unstable.discord
+
+    # Gnome 
+    gnome3.gnome-tweak-tool
+    unstable.gnomeExtensions.sound-output-device-chooser
   ];
 
   #programs.pywal.enable = true;
