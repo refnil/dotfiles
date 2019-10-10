@@ -51,7 +51,7 @@ in
   # Set group for sudoers
   users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" ];
 
-  services.tiddlywiki = {
+  services.refnil.tiddlywiki = {
     enable = true;
     path = "/data/tiddlywiki";
     listenAddress = "127.0.0.1";
@@ -88,6 +88,7 @@ in
     useSubstitutes = true;
   };
 
+  /*
   services.factorio = {
      enable = false;
      stateDir = "/data/factorio";
@@ -95,6 +96,7 @@ in
      lan = true;
      autosave-interval = 5;
   };
+  */
 
   services.no-ip = {
     enable = true;

@@ -1,9 +1,9 @@
 { lib, pkgs, config, ... }:
 with lib;                      
 let
-  cfg = config.services.tiddlywiki;
+  cfg = config.services.refnil.tiddlywiki;
 in {
-    options.services.tiddlywiki = {
+    options.services.refnil.tiddlywiki = {
     enable = mkEnableOption "tiddlywiki service";
     path = mkOption {
       type = types.string;
