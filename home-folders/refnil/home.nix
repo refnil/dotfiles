@@ -81,7 +81,7 @@ in
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       https-everywhere
-      decentraleyes
+      #decentraleyes
       link-cleaner
       octotree
       privacy-badger
