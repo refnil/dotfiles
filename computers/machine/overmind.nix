@@ -54,6 +54,7 @@ in
   services.refnil.tiddlywiki = {
     enable = true;
     path = "/data/tiddlywiki";
+    pathPrefix = "/wiki";
     listenAddress = "127.0.0.1";
     httpPort = 30001;
   };
@@ -160,18 +161,19 @@ in
        upstreamName = "localhost:${toString port}";
        backendURL = "http://${upstreamName}/";
        upstreamURL = "http://${name}/";
+
+       proxyURL  = "http://localhost:${toString port}/${name}/";
      in
      {
        virtualHosts = {
          "${name}.localhost" = {
            locations."/" = {
-             proxyPass = backendURL;
-             proxyWebsockets = true;
+             return = "301 http://localhost/${name}/";
            };
          };
          "localhost" = {
            locations."/${name}/" = {
-             proxyPass = upstreamURL;
+             proxyPass = proxyURL;
              proxyWebsockets = true;
            };
          };

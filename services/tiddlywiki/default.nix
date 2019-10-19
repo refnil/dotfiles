@@ -5,8 +5,19 @@ let
 in {
     options.services.refnil.tiddlywiki = {
     enable = mkEnableOption "tiddlywiki service";
+
     path = mkOption {
       type = types.string;
+    };
+
+    pathPrefix = mkOption {
+      type = types.string;
+      default = "";
+    };
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.nodePackages.tiddlywiki;
     };
 
     httpPort = mkOption {
@@ -24,13 +35,20 @@ in {
     networking.firewall.allowedTCPPorts = [ cfg.httpPort ];
     systemd.services.tiddlywiki = {
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.ExecStart = let ExecStart = pkgs.writeText "tiddlywiki_start" ''
-           if [ -z "$(ls -A ${cfg.path})" ]; then
-             ${pkgs.nodePackages.tiddlywiki}/bin/tiddlywiki ${cfg.path} --init server
-           fi
-           ${pkgs.nodePackages.tiddlywiki}/bin/tiddlywiki ${cfg.path} --server ${toString cfg.httpPort} $:/core/save/all text/plain text/html "" "" ${cfg.listenAddress}
-         '';
-      in "${pkgs.bash}/bin/bash ${ExecStart}";
+      serviceConfig.User = "tiddlywiki";
+      preStart = ''
+        if [ -z "$(ls -A ${cfg.path})" ]; then
+          ${cfg.package}/bin/tiddlywiki ${cfg.path} --init server
+        fi
+      '';
+      script = ''
+        ${cfg.package}/bin/tiddlywiki ${cfg.path} --server ${toString cfg.httpPort} $:/core/save/all text/plain text/html "" "" ${cfg.listenAddress} "${cfg.pathPrefix}"
+      '';
+    };
+    users.extraUsers.tiddlywiki = {
+      isSystemUser = true;
+      createHome = true;
+      home = cfg.path;
     };
   };
 }
