@@ -20,6 +20,11 @@ in {
       default = "127.0.0.1";
     };
 
+    baseURL = mkOption {
+      type = types.string;
+      default = "";
+    };
+
     userName = mkOption {
       type = types.string;
       default = "sage";
@@ -35,13 +40,13 @@ in {
     networking.firewall.allowedTCPPorts = [ cfg.httpPort ];
     systemd.services.sage = {
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.ExecStart = let ExecStart = pkgs.writeText "sage-service-exec-start" ''
-          mkdir -p ${cfg.path}/home ${cfg.path}/jupyter
-          chown sage ${cfg.path}/home ${cfg.path}/jupyter
-
-          ${pkgs.sudo}/bin/sudo -H -u sage ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter
-         '';
-      in "${pkgs.bash}/bin/bash ${ExecStart}";
+      serviceConfig.User = "sage";
+      preStart = ''
+          mkdir -p ${cfg.path}/jupyter
+      '';
+      script = ''
+          ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter ${optionalString (cfg.baseURL != "") "--NotebookApp.base_url=${cfg.baseURL}"}
+      '';
     };
 
     users.extraUsers.sage = {
