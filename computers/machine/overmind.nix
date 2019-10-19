@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let 
   # For keyboardio
   kaleidoscope_src = pkgs.fetchFromGitHub{
@@ -136,7 +136,7 @@ in
     DefaultLimitNOFILE=524288
   '';
 
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
   services.grafana = {
     enable = true;
@@ -157,14 +157,31 @@ in
   let
      makeHosts = name: port: 
      let
-       locations."/" = {
-         proxyPass = "http://localhost:${toString port}/";
-         proxyWebsockets = true;
-       };
+       upstreamName = "localhost:${toString port}";
+       backendURL = "http://${upstreamName}/";
+       upstreamURL = "http://${name}/";
      in
      {
-       "${name}.localhost" = {
-         inherit locations;
+       virtualHosts = {
+         "${name}.localhost" = {
+           locations."/" = {
+             proxyPass = backendURL;
+             proxyWebsockets = true;
+           };
+         };
+         "localhost" = {
+           locations."/${name}/" = {
+             proxyPass = upstreamURL;
+             proxyWebsockets = true;
+           };
+         };
+       };
+       upstreams = {
+         "${name}" = {
+           servers = {
+             "${upstreamName}" = {};
+           };
+         };
        };
        /*
        "${name}.refnil.ca" = {
@@ -182,12 +199,12 @@ in
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts = with builtins; foldl' (o1: o2: o1 // o2) {} [
+    inherit (with builtins; foldl' lib.attrsets.recursiveUpdate {} [
       (makeHosts "wiki" 30001)
       (makeHosts "sage" 30002)
       (makeHosts "chat" 30003)
       (makeHosts "git" 30004)
       #(makeHosts "hydra" 30005)
-    ];
+    ]) virtualHosts upstreams;
   };
 }
