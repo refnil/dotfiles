@@ -1,9 +1,3 @@
-[submodule "home-folders/refnil/submodules/vimrc"]
-	path = home-folders/refnil/submodules/vimrc
-	url = git@github.com:refnil/vimrc.git
 [submodule "home-folders/refnil/submodules/tmuxrc"]
 	path = home-folders/refnil/submodules/tmuxrc
 	url = git@github.com:refnil/tmuxrc.git
-[submodule "home-folders/refnil/submodules/vim-pony"]
-	path = home-folders/refnil/submodules/vim-pony
-	url = git@github.com:jakwings/vim-pony.git

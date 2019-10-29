@@ -35,6 +35,7 @@ in
       ./pub_keys/id_cerebrate.pub
       ./pub_keys/id_saladin.pub
       ./pub_keys/id_aiur.pub
+      ./pub_keys/id_phone.pub
     ];
   };
 }
