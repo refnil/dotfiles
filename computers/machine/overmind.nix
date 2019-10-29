@@ -71,6 +71,7 @@ in
   services.gitea = {
     enable = true;
     httpPort = 30004;
+    rootUrl = "http://%(DOMAIN)s:%(HTTP_PORT)s/";
     stateDir = "/data/gitea";
   };
 
