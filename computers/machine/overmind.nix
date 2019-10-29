@@ -91,6 +91,16 @@ in
     useSubstitutes = true;
   };
 
+  services.nextcloud = {
+    enable = false;
+    hostName = "localhost";
+    home = "/data/nextcloud";
+    nginx.enable = true;
+    config = {
+      adminpassFile = "/data/nextcloud/password";
+    };
+  };
+
   /*
   services.factorio = {
      enable = false;
