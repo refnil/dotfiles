@@ -40,7 +40,7 @@ in
     nur.repos.kalbasit.nixify 
     unstable.vlc
     niv-repo.niv
-    unstable.lutris
+    #unstable.lutris
     unstable.discord
 
     # Gnome 
@@ -126,8 +126,16 @@ in
     EDITOR = "vim";
   };
 
-  home.file = {
-    ".pythonrc".source = ./rcfiles/pythonrc;
+  home.file = with builtins;
+  let 
+    rcpath = ./rcfiles;
+    dir = builtins.readDir rcpath;
+    dirNames = attrNames dir;
+    fileToHomeSet = { filename, filetype }: if (filetype == "regular" || filetype == "symlink") then { ".${filename}" = { source = rcpath + "/${filename}"; }; } else {};
+
+    mergeSets = foldl' (l: r: l // r) {};
+    rcfilesAutoSet = mergeSets (map (name: fileToHomeSet {filename = name; filetype = getAttr name dir;}) dirNames);
+  in rcfilesAutoSet // {
     ".tmux.conf".source = ./submodules/tmuxrc/tmux.conf;
   };
 } 
