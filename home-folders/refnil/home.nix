@@ -23,9 +23,8 @@ in
     xdotool
     libreoffice
     calibre
-    unstable.steam
+
     bat # "Better" cat
-    nix-top # Explore running nix build
     bup
     python3Full
     python36Packages.glances
@@ -33,19 +32,26 @@ in
     tmate
     pass
     tomb
-    qutebrowser
-    #brave
-    #palemoon
+
+    vlc
+    mr
+
+    # Nix stuff
+    nix-top # Explore running nix build
     nox # pull request review for nixos
+
+    # Software to help with direnv
     nur.repos.kalbasit.nixify 
-    unstable.vlc
     niv-repo.niv
-    #unstable.lutris
+
+    # Gaming
+    unstable.steam
     unstable.discord
+    #unstable.lutris
 
     # Gnome 
     gnome3.gnome-tweak-tool
-    unstable.gnomeExtensions.sound-output-device-chooser
+    gnomeExtensions.sound-output-device-chooser
   ];
 
   #programs.pywal.enable = true;

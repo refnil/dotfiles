@@ -1,0 +1,23 @@
+[dotfiles]
+checkout = git clone 'git@github.com:refnil/dotfiles.git' 'dotfiles'
+
+[projets/keyboardio]
+checkout = git clone 'https://github.com/keyboardio/Kaleidoscope-Bundle-Keyboardio.git' 'keyboardio'
+
+[projets/resume]
+checkout = git clone 'git@gitlab.com:refnil/resume.git' 'resume'
+
+[projets/smart-eat]
+checkout = git clone 'gitea@localhost:refnil/smart-eat.git' 'smart-eat'
+
+[projets/slide-ml]
+checkout = git clone 'git@gitlab.com:refnil/slide-ml.git' 'slide-ml'
+
+[projets/Talks]
+checkout = git clone 'git@gitlab.com:refnil/talks' 'Talks'
+
+[contrib/home-manager]
+checkout = git clone 'https://github.com/rycee/home-manager' 'home-manager'
+
+[contrib/nixpkgs]
+checkout = git clone 'https://github.com/nixos/nixpkgs' 'nixpkgs'
