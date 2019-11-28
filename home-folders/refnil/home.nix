@@ -35,6 +35,7 @@ in
 
     vlc
     mr
+    taskell
 
     # Nix stuff
     nix-top # Explore running nix build
@@ -58,9 +59,6 @@ in
 
   programs.fish = {
       enable = true;
-      shellAliases = {
-        "wall" = "wal -i ~/test/Wallpapers/GanstaAnimals";
-      };
   };
 
   programs.command-not-found.enable = true;
