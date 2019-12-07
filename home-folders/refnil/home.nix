@@ -98,13 +98,27 @@ in
       relativenumber = true;
       number = true;
       expandtab = true;
-      tabstop = 8;
-      shiftwidth = 4;
+      tabstop = 2;
+      shiftwidth = 2;
     };
     extraConfig = ''
+      let mapleader = ','
+
       set softtabstop=0 smarttab 
       nnoremap <S-Tab> <<
       inoremap <S-Tab> <C-d>
+
+      " From haskell-vim readme
+      syntax on
+      filetype plugin indent on
+
+      " NERDTree
+      map <leader>nn :NERDTreeToggle<cr>
+      map <leader>nb :NERDTreeFromBookmark 
+      map <leader>nf :NERDTreeFind<cr>
+
+      " ctrlp-vim
+      let g:ctrlp_map = '<c-f>'
     '';
     plugins = with vimPlugins; [
       # vim-fish
@@ -113,7 +127,7 @@ in
       The_NERD_tree # file system explorer
       fugitive 
       vim-gitgutter # git 
-      ctrlp
+      ctrlp-vim
       haskell-vim
     ];
   };
