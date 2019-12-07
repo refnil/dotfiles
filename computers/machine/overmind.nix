@@ -49,7 +49,7 @@ in
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" ];
 
   services.refnil.tiddlywiki = {
     enable = true;
@@ -124,6 +124,9 @@ in
     8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     8080 
 
+    # Babybuddy
+    30008
+
     #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
     27036 27037 #27015
   ];
@@ -149,7 +152,7 @@ in
     DefaultLimitNOFILE=524288
   '';
 
-  #virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   services.grafana = {
     enable = true;
