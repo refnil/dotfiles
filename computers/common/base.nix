@@ -11,13 +11,23 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
   	enable = true;
-	forwardX11 = true;
+    forwardX11 = true;
     permitRootLogin = "no";
     passwordAuthentication = false;
   };
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware = {
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
+    opengl = { 
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [ libva ];
+    };
+  };
+
 
   system.autoUpgrade.enable = true;
 
@@ -35,9 +45,6 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "19.09"; # Did you read the comment?
-
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
 
   # Without any `nix.nixPath` entry:
   nix.nixPath =
