@@ -11,6 +11,7 @@
     shell = pkgs.zsh;
     openssh.authorizedKeys.keyFiles = [
       ./pub_keys/aiur.pub
+      ./pub_keys/cell.pub
     ];
   };
 
