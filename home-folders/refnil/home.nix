@@ -15,6 +15,8 @@ in
 
   home.packages = [
     git
+    gitAndTools.git-annex
+    lsof
     tmux
     unzip
     ripgrep
