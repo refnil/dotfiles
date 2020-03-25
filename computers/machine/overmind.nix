@@ -49,7 +49,7 @@ in
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" ];
 
   services.refnil.tiddlywiki = {
     enable = true;
@@ -163,6 +163,7 @@ in
   '';
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   services.grafana = {
     enable = true;
