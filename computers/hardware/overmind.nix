@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home/refnil/.local/share/Steam" = {
+    device = "/dev/sdb1";
+    fsType = "ext4";
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/a4759a63-f991-42f1-97f5-91cac8a80b34"; }
     ];
