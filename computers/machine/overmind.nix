@@ -139,6 +139,16 @@ in
     27031 27036 #27015
   ];
 
+  systemd.services.babybuddy = {
+    wantedBy = ["multi-user.target"];
+    requires = ["docker.service"];
+    script = ''
+      ${pkgs.docker-compose}/bin/docker-compose -f /home/refnil/workbench/babybuddy/docker-compose.yml up
+    '';
+    serviceConfig.User = "refnil";
+  };
+
+
   services.udev = {
     extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
   };
