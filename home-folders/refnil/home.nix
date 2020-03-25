@@ -35,6 +35,8 @@ in
     pass
     tomb
 
+    gparted
+
     vlc
     mr
     taskell
@@ -50,6 +52,7 @@ in
     # Gaming
     unstable.steam
     unstable.discord
+    vassal
     #unstable.lutris
 
     # Gnome 
@@ -89,7 +92,7 @@ in
       https-everywhere
       #decentraleyes
       link-cleaner
-      octotree
+      #octotree
       privacy-badger
     ];
   };
@@ -121,6 +124,8 @@ in
 
       " ctrlp-vim
       let g:ctrlp_map = '<c-f>'
+
+      set background=dark
     '';
     plugins = with vimPlugins; [
       # vim-fish
