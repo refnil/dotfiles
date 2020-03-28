@@ -17,6 +17,7 @@ in
 
       ../common/base.nix
       # ../common/vfio.nix
+      ../common/folding.nix
 
       ../../home-folders/refnil/user.nix
       ../../home-folders/mlapointe/user.nix
