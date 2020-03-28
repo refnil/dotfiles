@@ -11,6 +11,18 @@
         "url": "https://github.com/rycee/home-manager/archive/0d1ca254d0f213a118459c5be8ae465018132f74.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "kaleidoscope": {
+        "branch": "master",
+        "description": "Firmware for the Keyboardio Model 01 and other keyboards with AVR or ARM MCUs.",
+        "homepage": "http://keyboard.io",
+        "owner": "keyboardio",
+        "repo": "kaleidoscope",
+        "rev": "919d8736d5be80aff5f4c2dbeb404d33f223d7b3",
+        "sha256": "09cl9m03y2fnbdc0qh5sdg7igb5j49i2kh14sri89k7cgzmcy9ss",
+        "type": "tarball",
+        "url": "https://github.com/keyboardio/kaleidoscope/archive/919d8736d5be80aff5f4c2dbeb404d33f223d7b3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",

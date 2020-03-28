@@ -4,16 +4,11 @@
 
 { config, pkgs, lib, ... }:
 let 
+  sources = import ../..;
   # For keyboardio
-  kaleidoscope_src = pkgs.fetchFromGitHub{
-    owner = "keyboardio";
-    repo = "kaleidoscope";
-    rev = "f6d2e62649246173a0f11f647159a0cb7e1f1624";
-    sha256 = "0vxis627cbkyzd3883slcc16pfp2sc8bfx6gap4092zi29jajg3d";
-  };
+  kaleidoscope_src = sources.kaleidoscope.outPath;
 
   no-ip = pkgs.callPackage ../../packages/no-ip {};
-
 in
 {
   imports =
