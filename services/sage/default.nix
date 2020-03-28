@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "sage service";
 
     path = mkOption {
-      type = types.string;
+      type = types.str;
     };
 
     httpPort = mkOption {
@@ -16,17 +16,17 @@ in {
     };
 
     listenAddress = mkOption {
-      type = types.string;
+      type = types.str;
       default = "127.0.0.1";
     };
 
     baseURL = mkOption {
-      type = types.string;
+      type = types.str;
       default = "";
     };
 
     userName = mkOption {
-      type = types.string;
+      type = types.str;
       default = "sage";
     };
 

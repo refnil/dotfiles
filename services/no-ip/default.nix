@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "no-ip ddns service";
 
     config-file = mkOption {
-      type = types.string;
+      type = types.str;
     };
 
     package = mkOption {

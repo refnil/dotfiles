@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "wireguard networking";
 
     interfaceName = mkOption {
-      type = types.string;
+      type = types.str;
       default = "wg0";
     };
 
@@ -17,7 +17,7 @@ in {
     };
 
     ip = mkOption {
-      type = types.string;
+      type = types.str;
     };
 
     peers = mkOption {
@@ -26,7 +26,7 @@ in {
     };
 
     privateKeyFile = mkOption {
-      type = types.string;
+      type = types.str;
     };
   };
 

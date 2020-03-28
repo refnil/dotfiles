@@ -7,11 +7,11 @@ in {
     enable = mkEnableOption "tiddlywiki service";
 
     path = mkOption {
-      type = types.string;
+      type = types.str;
     };
 
     pathPrefix = mkOption {
-      type = types.string;
+      type = types.str;
       default = "";
     };
 
@@ -26,7 +26,7 @@ in {
     };
 
     listenAddress = mkOption {
-      type = types.string;
+      type = types.str;
       default = "127.0.0.1";
     };
   };
