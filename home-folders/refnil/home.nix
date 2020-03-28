@@ -1,17 +1,22 @@
 { pkgs, options, ...}:
 with pkgs;
 let 
-  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { config = { allowUnfree = true; }; };
-  nur = import (builtins.fetchTarball {
-    # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
-    url = "https://github.com/nix-community/NUR/archive/488e99b6a5cb639b10ba0d82ec9788dfe2a57d5d.tar.gz";
-    # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
-    sha256 = "1mnavmx93wpqjrgzpk4bkb67hlks532kya18j5li7va26v8lpqkz";
-  }) { pkgs = unstable; };
-  niv-repo = import (fetchTarball https://github.com/nmattia/niv/tarball/master) {};
+  sources = import ../..;
+
+  unstable-path = sources.nixos-unstable.outPath;
+  unstable = import unstable-path { config = { allowUnfree = true; }; };
+
+  nur-path = sources.nur.outPath;
+  nur = import nur-path { pkgs = unstable; };
+
+  niv-path = sources.niv.outPath;
+  niv = import niv-path {};
+
 in
 {
   imports = [ ./home-bootstrap.nix ];
+
+  programs.home-manager.path = lib.mkForce sources.home-manager.outPath; 
 
   home.packages = [
     git
@@ -47,7 +52,7 @@ in
 
     # Software to help with direnv
     nur.repos.kalbasit.nixify 
-    niv-repo.niv
+    niv.niv
 
     # Gaming
     unstable.steam

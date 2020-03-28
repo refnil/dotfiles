@@ -1,5 +1,1 @@
-{
-  computers = ./computers;
-  home-folders = ./home-folders;
-  services = ./services;
-}
+import ./nix/sources.nix
