@@ -1,10 +1,8 @@
-self: super:
-
-let
-  callPackage = self.callPackage;
-  source = import ../..;
-  unstableTarball = source.nixos-unstable.outPath;
-in
+{...}:
 {
-  unstable = super.callPackage unstableTarball {};
+  nixpkgs = {
+    overlays = [
+      (import ./unstable-overlay.nix)
+    ];
+  };
 }

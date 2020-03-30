@@ -1,8 +1,11 @@
 { config, pkgs, options, ... }:
 {
+  imports = [
+    ./unstable.nix
+  ];
+
   fonts.fonts = [
     pkgs.corefonts
-
   ];
   
   # Set your time zone.
@@ -60,9 +63,6 @@
       allowUnfree = true;
       useSandbox = true;
     };
-    overlays = [
-      (import ./unstable.nix)
-    ];
   };
 
   boot.supportedFilesystems = [ "ntfs" ];
