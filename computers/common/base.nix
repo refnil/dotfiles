@@ -26,7 +26,6 @@
       support32Bit = true;
     };
     opengl = { 
-      driSupport32Bit = true;
       extraPackages = with pkgs; [ libva ];
     };
   };
@@ -58,10 +57,10 @@
     [ "nixpkgs-overlays=${./overlay-compat}" ]
   ;
 
+  nix.useSandbox = true;
   nixpkgs = {
     config = {
       allowUnfree = true;
-      useSandbox = true;
     };
   };
 
