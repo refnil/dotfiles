@@ -144,13 +144,8 @@ in
     ];
   };
 
-  services.polybar = {
-  	enable = false;
-	config = https://raw.githubusercontent.com/jaagr/dots/master/.local/etc/themer/themes/space/polybar;
-	script = ''
-	  polybar bar/top &
-	'';
-  };
+  systemd.user.startServices = true;
+  services.lorri.enable = true;
 
   home.sessionVariables = {
     EDITOR = "vim";
