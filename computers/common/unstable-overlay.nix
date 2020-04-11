@@ -2,8 +2,8 @@ self: super:
 
 let
   callPackage = self.callPackage;
-  source = import ../..;
-  unstableTarball = source.nixos-unstable.outPath;
+  sources = import ../..;
+  unstableTarball = import sources.nixos-unstable {};
 in
 {
   unstable = super.callPackage unstableTarball {};

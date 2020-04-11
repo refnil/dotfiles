@@ -1,6 +1,6 @@
 { pkgs, libs, config, ...}:
 let sources = import ../..;
-    unstable = sources.nixos-unstable.outPath;
+    unstable = toString sources.nixos-unstable;
     foldingathome = "${unstable}/nixos/modules/services/computing/foldingathome/client.nix";
 in
 {

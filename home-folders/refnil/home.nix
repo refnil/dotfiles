@@ -3,20 +3,16 @@ with pkgs;
 let 
   sources = import ../..;
 
-  unstable-path = sources.nixos-unstable.outPath;
-  unstable = import unstable-path { config = { allowUnfree = true; }; };
+  unstable = import sources.nixos-unstable { config = { allowUnfree = true; }; };
 
-  nur-path = sources.nur.outPath;
-  nur = import nur-path { pkgs = unstable; };
+  nur = import sources.nur { pkgs = unstable; };
 
-  niv-path = sources.niv.outPath;
-  niv = import niv-path {};
-
+  niv = import sources.niv {};
 in
 {
   imports = [ ./home-bootstrap.nix ];
 
-  programs.home-manager.path = lib.mkForce sources.home-manager.outPath; 
+  programs.home-manager.path = lib.mkForce (toString sources.home-manager);
 
   home.packages = [
     git
