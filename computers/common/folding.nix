@@ -4,9 +4,11 @@ let sources = import ../..;
     foldingathome = "${unstable}/nixos/modules/services/computing/foldingathome/client.nix";
 in
 {
-
   disabledModules = [ "services/misc/folding-at-home.nix" ];
-  imports = [ foldingathome ];
+  imports = [ 
+    foldingathome 
+    ./unstable.nix
+  ];
 
   services.foldingathome = {
     enable = true;

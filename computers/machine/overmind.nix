@@ -6,7 +6,7 @@
 let 
   sources = import ../..;
   # For keyboardio
-  kaleidoscope_src = import sources.kaleidoscope;
+  kaleidoscope_src = sources.kaleidoscope.outPath;
 
   no-ip = pkgs.callPackage ../../packages/no-ip {};
 in
