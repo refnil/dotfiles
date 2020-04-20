@@ -23,8 +23,9 @@ in
       ../../home-folders/mlapointe/user.nix
 
       ../../services/tiddlywiki
-      ../../services/sage
       ../../services/no-ip
+
+      ../services/sage.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -56,14 +57,17 @@ in
     httpPort = 30001;
   };
 
-  services.sage = {
-    enable = true;
-    path = "/data/sage";
-    listenAddress = "0.0.0.0";
-    baseURL = "sage";
-    httpPort = 30002;
-    package = pkgs.unstable.sage;
+  /*
+  containers.sage = {
+    autoStart = true;
+    config = import ../services/sage.nix;
+    extraFlags = ["-U"];
+    privateNetwork = true;
+    hostAddress = "192.168.100.10";
+    localAddress = "192.168.100.11";
+    forwardPorts = [ { hostPort = 30002; } ];
   };
+  */
 
   services.gitea = {
     enable = true;
