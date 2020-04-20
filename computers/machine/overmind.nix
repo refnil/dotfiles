@@ -153,6 +153,11 @@ in
   services.udev = {
     extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
   };
+  #options.hardware.steam-hardware.enable = true;
+  boot.kernelModules = [ "uinput" ];
+  services.udev.packages = [
+          pkgs.steamPackages.steam
+              ];
 
   # Pour faire marcher diablo 3
   systemd.extraConfig = ''

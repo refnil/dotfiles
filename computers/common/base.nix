@@ -27,6 +27,7 @@
     };
     opengl = { 
       extraPackages = with pkgs; [ libva ];
+      driSupport32Bit = true;
     };
   };
 
