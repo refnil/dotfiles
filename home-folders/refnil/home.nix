@@ -26,6 +26,7 @@ in
     xdotool
     libreoffice
     calibre
+    killall
 
     bat # "Better" cat
     bup
