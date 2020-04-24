@@ -1,4 +1,4 @@
-{ pkgs, options, ...}:
+{ pkgs, options, config,  ...}:
 with pkgs;
 let 
   sources = import ../..;
@@ -126,19 +126,42 @@ in
 
       " ctrlp-vim
       let g:ctrlp_map = '<c-f>'
+      let g:ctrlp_cmd = 'CtrlPBuffer'
+      let g:ctrlp_user_command = 'rg --files'
 
       set background=dark
     '';
     plugins = with vimPlugins; [
-      # vim-fish
-      idris-vim
       vim-airline
       The_NERD_tree # file system explorer
+      nerdcommenter 
       fugitive 
       vim-gitgutter # git 
-      ctrlp-vim
+      ctrlp-vim # fzf
+      #ack
+      rainbow
+
+      # Languages
+      vim-nix
       haskell-vim
+      idris-vim
+      # vim-fish
     ];
+  };
+  
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    withNodeJs = true;
+
+    plugins = with vimPlugins; config.programs.vim.plugins ++ [
+      # Language Server Protocol
+      coc-nvim
+    ];
+
+    extraConfig = config.programs.vim.extraConfig + ''
+
+    '';
   };
 
   systemd.user.startServices = true;
