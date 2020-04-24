@@ -9,8 +9,10 @@ let
   kaleidoscope_src = sources.kaleidoscope.outPath;
 
   no-ip = pkgs.callPackage ../../packages/no-ip {};
+  factorioServicePath = "${toString sources.nixos-unstable}/nixos/modules/services/games/factorio.nix";
 in
 {
+  disabledModules = [ "services/games/factorio.nix" ];
   imports =
     [ 
       ../hardware/overmind.nix
@@ -26,6 +28,7 @@ in
       ../../services/no-ip
 
       ../services/sage.nix
+      factorioServicePath
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,7 +50,7 @@ in
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "terraria" ];
 
   services.refnil.tiddlywiki = {
     enable = true;
@@ -102,16 +105,6 @@ in
     };
   };
 
-  /*
-  services.factorio = {
-     enable = false;
-     stateDir = "/data/factorio";
-     game-name = "factorio";
-     lan = true;
-     autosave-interval = 5;
-  };
-  */
-
   services.no-ip = {
     enable = true;
 
@@ -130,6 +123,8 @@ in
 
     #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
     27036 27037 #27015
+
+    7777 # Terraria
   ];
 
   networking.firewall.allowedUDPPorts = [ 
@@ -185,6 +180,30 @@ in
     }
   ];
   */
+
+  services.factorio = { # auto port udp 34197
+    enable = true;
+    package = pkgs.factorio-headless-experimental.overrideDerivation (old: {
+      src = let version = "0.18.20"; in pkgs.fetchurl {
+        name = "factorio_headless_x64-${version}.tar.xz";
+        url = "https://factorio.com/get-download/${version}/headless/linux64";
+        sha256 = "0wzlphlzkwqjcc7hk4yb4d6y2y77vhkgnda3x2fhn2krih2szv42";
+      };
+    });
+    saveName = "FactorioSecret";
+    game-password = "LaTour";
+    requireUserVerification = true;
+    autosave-interval = 5;
+  };
+
+  services.terraria = { # port tcp 7777
+    enable = true;
+    password = "LaTour";
+    worldPath = /var/lib/terraria/latour.wld;
+    autoCreatedWorldSize = "large";
+    secure = true;
+    noUPnP = true;
+  };
 
   services.nginx = 
   let
