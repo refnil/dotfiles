@@ -45,6 +45,7 @@
 
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.clickMethod = "clickfinger";
 
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
@@ -60,4 +61,11 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   nixpkgs.config.allowUnfree = true;
+
+  environment.variables = {
+      MESA_LOADER_DRIVER_OVERRIDE = "iris";
+    };
+    hardware.opengl.package = (pkgs.mesa.override {
+      galliumDrivers = [ "nouveau" "virgl" "swrast" "iris" ];
+    }).drivers;
 }
