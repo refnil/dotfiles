@@ -27,6 +27,7 @@
     };
     opengl = { 
       extraPackages = with pkgs; [ libva ];
+      driSupport32Bit = true;
     };
   };
 
@@ -47,8 +48,9 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "20.03"; # Did you read the comment?
 
+  /*
   # Without any `nix.nixPath` entry:
   nix.nixPath =
     # Prepend default nixPath values.
@@ -56,9 +58,13 @@
     # Append our nixpkgs-overlays.
     [ "nixpkgs-overlays=${./overlay-compat}" ]
   ;
+  */
 
   nix.useSandbox = true;
   nixpkgs = {
+    pkgs = import (import ../..).nixos-stable {
+      inherit (config.nixpkgs) config;
+    };
     config = {
       allowUnfree = true;
     };

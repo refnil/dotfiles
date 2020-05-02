@@ -52,7 +52,8 @@ in {
     users.extraUsers.sage = {
       isSystemUser = true;
       useDefaultShell = true;
-      home = "${cfg.path}/home";
+      home = "${cfg.path}";
+      createHome = true;
     };
   };
 }

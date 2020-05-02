@@ -24,7 +24,7 @@
     };
 
   fileSystems."/home/refnil/.local/share/Steam" = {
-    device = "/dev/sdb1";
+    device = "/dev/disk/by-uuid/79cde096-cd32-4a53-bb10-c9c78e36a8d9";
     fsType = "ext4";
   };
 
