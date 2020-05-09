@@ -36,6 +36,7 @@ in
     tmate
     pass
     tomb
+    remmina
 
     gparted
 
