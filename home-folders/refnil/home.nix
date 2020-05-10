@@ -21,7 +21,6 @@ in
     git
     gitAndTools.git-annex
     lsof
-    tmux
     unzip
     ripgrep
     evince 
@@ -85,11 +84,24 @@ in
       userName = "Martin Lavoie";
       userEmail = "broemartino@gmail.com";
   };
+  programs.tmux = {
+    enable = true;
+    extraConfig = (builtins.readFile ./submodules/tmuxrc/tmux.conf);
+    plugins = with tmuxPlugins; [
+      vim-tmux-navigator
+      gruvbox
+    ];
+  };
   programs.htop.enable = true;
   programs.man.enable = true;
 
   programs.ssh.enable = true;
-  programs.termite.enable = true;
+  programs.termite = {
+    enable = true;
+    clickableUrl = true;
+    mouseAutohide = true;
+    colorsExtra = builtins.readFile "${sources.gruvbox-contrib.outPath}/termite/gruvbox-dark";
+  };
 
   programs.firefox = {
 
@@ -125,6 +137,5 @@ in
     mergeSets = foldl' (l: r: l // r) {};
     rcfilesAutoSet = mergeSets (map (name: fileToHomeSet {filename = name; filetype = getAttr name dir;}) dirNames);
   in rcfilesAutoSet // {
-    ".tmux.conf".source = ./submodules/tmuxrc/tmux.conf;
   };
 } 

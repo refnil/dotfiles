@@ -47,6 +47,7 @@ with pkgs;
       ctrlp-vim # fzf
       #ack
       rainbow
+      vim-tmux-navigator
 
       #Color themes
       gruvbox

@@ -1,4 +1,16 @@
 {
+    "gruvbox-contrib": {
+        "branch": "master",
+        "description": "Ports of the gruvbox colorscheme",
+        "homepage": "",
+        "owner": "morhetz",
+        "repo": "gruvbox-contrib",
+        "rev": "edb3ee5f626cdfb250d5ab42c1f5ccb9f8050514",
+        "sha256": "0n32s5var4xxwk3bwm70mwja0gy6vaj2awm6kji10yw3fpqgg7yh",
+        "type": "tarball",
+        "url": "https://github.com/morhetz/gruvbox-contrib/archive/edb3ee5f626cdfb250d5ab42c1f5ccb9f8050514.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "release-20.03",
         "description": "Manage a user environment using Nix",
