@@ -27,6 +27,7 @@ in
     libreoffice
     calibre
     killall
+    fd
 
     bat # "Better" cat
     bup
@@ -167,6 +168,13 @@ in
 
   systemd.user.startServices = true;
   services.lorri.enable = true;
+
+  xdg.mimeApps = {
+    enable = false;
+    defaultApplications = {
+      "application/x-keepass" = "keepass.desktop";
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "vim";
