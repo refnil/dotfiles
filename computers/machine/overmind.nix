@@ -125,6 +125,8 @@ in
     27036 27037 #27015
 
     7777 # Terraria
+
+    24800 # Barrier
   ];
 
   networking.firewall.allowedUDPPorts = [ 
@@ -199,11 +201,27 @@ in
   services.terraria = { # port tcp 7777
     enable = true;
     password = "LaTour";
-    worldPath = /var/lib/terraria/latour.wld;
-    autoCreatedWorldSize = "large";
     secure = true;
     noUPnP = true;
   };
+
+  nixpkgs.overlays = let
+    terraria-overlay = self: super: {
+      terraria-server = (import sources.nixos-unstable { config.allowUnfree = true;}).terraria-server.overrideAttrs (old: { 
+        src = pkgs.fetchurl {
+          url = "https://www.terraria.org/system/dedicated_servers/archives/000/000/038/original/terraria-server-1404.zip";
+          sha256 = "09zkadjd04gbx1yvwpqmm89viydwxqgixbqhbqncb94qb2z5gfxk";
+        };
+        buildInputs = old.buildInputs ++ [ self.makeWrapper ];
+        preFixup = ''
+          wrapProgram "$out/Linux/TerrariaServer.bin.x86_64" --set TERM xterm
+          mv "$out/Linux/TerrariaServer.exe" "$out/Linux/.TerrariaServer.exe"
+        '';
+      });
+    };
+  in [
+    terraria-overlay
+  ];
 
   services.nginx = 
   let
