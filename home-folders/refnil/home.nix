@@ -30,6 +30,7 @@ in
     calibre
     killall
     fd
+    barrier # Share keyboard and mouse via the network
 
     bat # "Better" cat
     bup
