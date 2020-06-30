@@ -37,6 +37,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
   
   networking.hostName = "overmind"; # Define your hostname.
+  networking.networkmanager.enable = true;
 
   # Enable the X11 windowing system.
   # services.xserver.layout = "us";
@@ -50,7 +51,7 @@ in
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "terraria" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "terraria" "networkmanager" ];
 
   services.refnil.tiddlywiki = {
     enable = true;
