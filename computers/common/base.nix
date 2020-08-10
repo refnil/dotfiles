@@ -31,9 +31,6 @@
     };
   };
 
-
-  system.autoUpgrade.enable = true;
-
   services.xserver = {
     enable = true;   
     autorun = true;
@@ -49,16 +46,6 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "20.03"; # Did you read the comment?
-
-  /*
-  # Without any `nix.nixPath` entry:
-  nix.nixPath =
-    # Prepend default nixPath values.
-    options.nix.nixPath.default ++ 
-    # Append our nixpkgs-overlays.
-    [ "nixpkgs-overlays=${./overlay-compat}" ]
-  ;
-  */
 
   nix.useSandbox = true;
   nixpkgs = {
