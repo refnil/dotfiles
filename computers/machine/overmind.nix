@@ -184,10 +184,10 @@ in
   services.factorio = { # auto port udp 34197
     enable = true;
     package = pkgs.factorio-headless-experimental.overrideDerivation (old: {
-      src = let version = "0.18.20"; in pkgs.fetchurl {
+      src = let version = "0.18.21"; in pkgs.fetchurl {
         name = "factorio_headless_x64-${version}.tar.xz";
         url = "https://factorio.com/get-download/${version}/headless/linux64";
-        sha256 = "0wzlphlzkwqjcc7hk4yb4d6y2y77vhkgnda3x2fhn2krih2szv42";
+        sha256 = "0ywb221yfskmri9v9syiqd96vpz2psgx7v0jgjxp8ysmwfm1mskx";
       };
     });
     saveName = "FactorioSecret";

@@ -1,4 +1,4 @@
-{ pkgs, options, config,  ...}:
+{ pkgs, config,  ...}:
 with pkgs;
 let 
   sources = import ../..;
@@ -10,7 +10,10 @@ let
   niv = import sources.niv {};
 in
 {
-  imports = [ ./home-bootstrap.nix ];
+  imports = [ 
+    ./home-bootstrap.nix 
+    ./vim.nix
+  ];
 
   programs.home-manager.path = lib.mkForce (toString sources.home-manager);
 
@@ -18,7 +21,6 @@ in
     git
     gitAndTools.git-annex
     lsof
-    tmux
     unzip
     ripgrep
     evince 
@@ -27,6 +29,7 @@ in
     libreoffice
     calibre
     killall
+    fd
 
     bat # "Better" cat
     bup
@@ -36,6 +39,7 @@ in
     tmate
     pass
     tomb
+    remmina
 
     gparted
 
@@ -80,11 +84,24 @@ in
       userName = "Martin Lavoie";
       userEmail = "broemartino@gmail.com";
   };
+  programs.tmux = {
+    enable = true;
+    extraConfig = (builtins.readFile ./submodules/tmuxrc/tmux.conf);
+    plugins = with tmuxPlugins; [
+      vim-tmux-navigator
+      gruvbox
+    ];
+  };
   programs.htop.enable = true;
   programs.man.enable = true;
 
   programs.ssh.enable = true;
-  programs.termite.enable = true;
+  programs.termite = {
+    enable = true;
+    clickableUrl = true;
+    mouseAutohide = true;
+    colorsExtra = builtins.readFile "${sources.gruvbox-contrib.outPath}/termite/gruvbox-dark";
+  };
 
   programs.firefox = {
 
@@ -99,76 +116,15 @@ in
     ];
   };
 
-  programs.vim = {
-    enable = true;
-    settings = {
-      relativenumber = true;
-      number = true;
-      expandtab = true;
-      tabstop = 2;
-      shiftwidth = 2;
-    };
-    extraConfig = ''
-      let mapleader = ','
-
-      set softtabstop=0 smarttab 
-      nnoremap <S-Tab> <<
-      inoremap <S-Tab> <C-d>
-
-      " From haskell-vim readme
-      syntax on
-      filetype plugin indent on
-
-      " NERDTree
-      map <leader>nn :NERDTreeToggle<cr>
-      map <leader>nb :NERDTreeFromBookmark 
-      map <leader>nf :NERDTreeFind<cr>
-
-      " ctrlp-vim
-      let g:ctrlp_map = '<c-f>'
-      let g:ctrlp_cmd = 'CtrlPBuffer'
-      let g:ctrlp_user_command = 'rg --files'
-
-      set background=dark
-    '';
-    plugins = with vimPlugins; [
-      vim-airline
-      The_NERD_tree # file system explorer
-      nerdcommenter 
-      fugitive 
-      vim-gitgutter # git 
-      ctrlp-vim # fzf
-      #ack
-      rainbow
-
-      # Languages
-      vim-nix
-      haskell-vim
-      idris-vim
-      # vim-fish
-    ];
-  };
-  
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    withNodeJs = true;
-
-    plugins = with vimPlugins; config.programs.vim.plugins ++ [
-      # Language Server Protocol
-      coc-nvim
-    ];
-
-    extraConfig = config.programs.vim.extraConfig + ''
-
-    '';
-  };
 
   systemd.user.startServices = true;
   services.lorri.enable = true;
 
-  home.sessionVariables = {
-    EDITOR = "vim";
+  xdg.mimeApps = {
+    enable = false;
+    defaultApplications = {
+      "application/x-keepass" = "keepass.desktop";
+    };
   };
 
   home.file = with builtins;
@@ -181,6 +137,5 @@ in
     mergeSets = foldl' (l: r: l // r) {};
     rcfilesAutoSet = mergeSets (map (name: fileToHomeSet {filename = name; filetype = getAttr name dir;}) dirNames);
   in rcfilesAutoSet // {
-    ".tmux.conf".source = ./submodules/tmuxrc/tmux.conf;
   };
 } 
