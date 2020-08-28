@@ -81,7 +81,7 @@ in
   };
 
   services.mattermost = {
-    enable = true;
+    enable = false;
     statePath = "/data/mattermost";
     siteUrl = "http://localhost:30003";
     listenAddress = ":30003";
@@ -185,7 +185,7 @@ in
   */
 
   services.factorio = { # auto port udp 34197
-    enable = true;
+    enable = false;
     package = pkgs.factorio-headless-experimental.overrideDerivation (old: {
       src = let version = "0.18.21"; in pkgs.fetchurl {
         name = "factorio_headless_x64-${version}.tar.xz";

@@ -60,4 +60,7 @@
   boot.supportedFilesystems = [ "ntfs" ];
   boot.cleanTmpDir = true;
   boot.tmpOnTmpfs = true;
+
+  documentation.doc.enable=false;
+  documentation.info.enable = false;
 }
