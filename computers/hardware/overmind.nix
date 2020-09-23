@@ -23,10 +23,12 @@
       fsType = "vfat";
     };
 
-  #fileSystems."/home/refnil/.local/share/Steam" = {
-    #device = "/dev/disk/by-uuid/79cde096-cd32-4a53-bb10-c9c78e36a8d9";
-    #fsType = "ext4";
-  #};
+  fileSystems."/home/refnil/.local/share/Steam" = {
+    device = "/dev/disk/by-uuid/79cde096-cd32-4a53-bb10-c9c78e36a8d9";
+    fsType = "ext4";
+    neededForBoot = false;
+    noCheck = true;
+  };
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/a4759a63-f991-42f1-97f5-91cac8a80b34"; }
