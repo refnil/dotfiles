@@ -9,7 +9,6 @@ let
   kaleidoscope_src = sources.kaleidoscope.outPath;
 
   no-ip = pkgs.callPackage ../../packages/no-ip {};
-  factorioServicePath = "${toString sources.nixos-unstable}/nixos/modules/services/games/factorio.nix";
 in
 {
   disabledModules = [ "services/games/factorio.nix" ];
@@ -28,7 +27,6 @@ in
       ../../services/no-ip
 
       ../services/sage.nix
-      factorioServicePath
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -51,7 +49,7 @@ in
   #services.xserver.desktopManager.plasma5.enable = true;
 
   # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "terraria" "networkmanager" ];
+  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "networkmanager" ];
 
   services.refnil.tiddlywiki = {
     enable = true;
@@ -107,7 +105,7 @@ in
   };
 
   services.no-ip = {
-    enable = true;
+    enable = false;
 
     config-file = "/data/no-ip/no-ip.conf";
     package = no-ip;
@@ -119,13 +117,8 @@ in
     8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     8080 
 
-    # Babybuddy
-    30008
-
     #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
     27036 27037 #27015
-
-    7777 # Terraria
 
     24800 # Barrier
   ];
@@ -137,16 +130,6 @@ in
     #Steam link
     27031 27036 #27015
   ];
-
-  systemd.services.babybuddy = {
-    wantedBy = ["multi-user.target"];
-    requires = ["docker.service"];
-    script = ''
-      ${pkgs.docker-compose}/bin/docker-compose -f /home/refnil/workbench/babybuddy/docker-compose.yml up
-    '';
-    serviceConfig.User = "refnil";
-  };
-
 
   services.udev = {
     extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
@@ -170,7 +153,7 @@ in
   virtualisation.libvirtd.enable = true;
 
   services.grafana = {
-    enable = true;
+    enable = false;
     port = 30006;
   };
 
@@ -198,31 +181,6 @@ in
     requireUserVerification = true;
     autosave-interval = 5;
   };
-
-  services.terraria = { # port tcp 7777
-    enable = true;
-    password = "LaTour";
-    secure = true;
-    noUPnP = true;
-  };
-
-  nixpkgs.overlays = let
-    terraria-overlay = self: super: {
-      terraria-server = (import sources.nixos-unstable { config.allowUnfree = true;}).terraria-server.overrideAttrs (old: { 
-        src = pkgs.fetchurl {
-          url = "https://www.terraria.org/system/dedicated_servers/archives/000/000/038/original/terraria-server-1404.zip";
-          sha256 = "09zkadjd04gbx1yvwpqmm89viydwxqgixbqhbqncb94qb2z5gfxk";
-        };
-        buildInputs = old.buildInputs ++ [ self.makeWrapper ];
-        preFixup = ''
-          wrapProgram "$out/Linux/TerrariaServer.bin.x86_64" --set TERM xterm
-          mv "$out/Linux/TerrariaServer.exe" "$out/Linux/.TerrariaServer.exe"
-        '';
-      });
-    };
-  in [
-    terraria-overlay
-  ];
 
   services.nginx = 
   let
@@ -274,7 +232,7 @@ in
     inherit (with builtins; foldl' lib.attrsets.recursiveUpdate {} [
       (makeHosts "wiki" 30001)
       (makeHosts "sage" 30002)
-      (makeHosts "chat" 30003)
+      #(makeHosts "chat" 30003)
       (makeHosts "git" 30004)
       #(makeHosts "hydra" 30005)
     ]) virtualHosts upstreams;
