@@ -11,7 +11,6 @@ let
   no-ip = pkgs.callPackage ../../packages/no-ip {};
 in
 {
-  disabledModules = [ "services/games/factorio.nix" ];
   imports =
     [ 
       ../hardware/overmind.nix
@@ -169,6 +168,7 @@ in
 
   services.factorio = { # auto port udp 34197
     enable = false;
+    /*
     package = pkgs.factorio-headless-experimental.overrideDerivation (old: {
       src = let version = "0.18.21"; in pkgs.fetchurl {
         name = "factorio_headless_x64-${version}.tar.xz";
@@ -176,6 +176,7 @@ in
         sha256 = "0ywb221yfskmri9v9syiqd96vpz2psgx7v0jgjxp8ysmwfm1mskx";
       };
     });
+    */
     saveName = "FactorioSecret";
     game-password = "LaTour";
     requireUserVerification = true;
