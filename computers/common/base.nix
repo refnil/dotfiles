@@ -9,7 +9,7 @@
   ];
   
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "Europe/Paris";
 
   # Enable the OpenSSH daemon.
   services.openssh = {
