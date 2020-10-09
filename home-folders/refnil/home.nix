@@ -110,10 +110,12 @@ in
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       https-everywhere
-      #decentraleyes
+      decentraleyes
       link-cleaner
-      #octotree
+      octotree
       privacy-badger
+      multi-account-containers
+      facebook-container
     ];
   };
 
