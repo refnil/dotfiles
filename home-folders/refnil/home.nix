@@ -25,7 +25,7 @@ in
     unzip
     ripgrep
     evince 
-    keepass
+    unstable.keepassxc
     xdotool
     libreoffice
     calibre
