@@ -6,7 +6,7 @@ with pkgs;
   };
 
   programs.vim = {
-    enable = true;
+    enable = false;
     settings = {
       relativenumber = true;
       number = true;
@@ -63,6 +63,7 @@ with pkgs;
   programs.neovim = {
     enable = true;
     viAlias = true;
+    vimAlias = true;
     withNodeJs = true;
 
     plugins = with vimPlugins; config.programs.vim.plugins ++ [
