@@ -7,14 +7,13 @@ with pkgs;
 
   programs.vim = {
     enable = false;
-    settings = {
-      relativenumber = true;
-      number = true;
-      expandtab = true;
-      tabstop = 2;
-      shiftwidth = 2;
-    };
     extraConfig = ''
+      set number relativenumber
+      set nu rnu
+      set expandtab
+      set tabstop=2
+      set shiftwidth=2
+
       let mapleader = ','
 
       set softtabstop=0 smarttab 
