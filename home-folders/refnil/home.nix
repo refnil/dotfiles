@@ -36,7 +36,7 @@ in
     bat # "Better" cat
     bup
     python3Full
-    python36Packages.glances
+    glances
     mosh
     tmate
     pass
@@ -183,7 +183,6 @@ in
       {
         home = defaultProfile // {
           id = 0;
-        };
         };
       };
   };

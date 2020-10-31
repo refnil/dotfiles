@@ -17,7 +17,6 @@ in
 
       ../common/base.nix
       # ../common/vfio.nix
-      ../common/folding.nix
 
       ../../home-folders/refnil/user.nix
       ../../home-folders/mlapointe/user.nix
@@ -25,7 +24,7 @@ in
       ../../services/tiddlywiki
       ../../services/no-ip
 
-      ../services/sage.nix
+      #../services/sage.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -97,7 +96,6 @@ in
     enable = false;
     hostName = "localhost";
     home = "/data/nextcloud";
-    nginx.enable = true;
     config = {
       adminpassFile = "/data/nextcloud/password";
     };
