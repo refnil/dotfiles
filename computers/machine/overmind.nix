@@ -24,7 +24,7 @@ in
       ../../services/tiddlywiki
       ../../services/no-ip
 
-      #../services/sage.nix
+      ../services/sage.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
