@@ -63,4 +63,6 @@
 
   documentation.doc.enable=false;
   documentation.info.enable = false;
+
+  programs.bcc.enable = true;
 }
