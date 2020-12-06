@@ -95,6 +95,7 @@ in
     plugins = with tmuxPlugins; [
       vim-tmux-navigator
       gruvbox
+      /*
       {
         plugin = resurrect;
         extraConfig = ''
@@ -110,6 +111,7 @@ in
           set -g @continuum-save-interval '5'
         '';
       }
+      */
     ];
   };
   programs.htop.enable = true;
