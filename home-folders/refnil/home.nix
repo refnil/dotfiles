@@ -122,7 +122,6 @@ in
   };
 
   programs.firefox = {
-
     enable = true;
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
@@ -137,50 +136,56 @@ in
       terms-of-service-didnt-read
       keepassxc-browser
     ]  ++ extra-firefox-addons;
-    profiles = {
-      home = {
-        id = 0;
-        settings = {
-          "app.update.auto" = false;
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          "signon.rememberSignons" = false;
-          "browser.startup.page" = 3;
-          "app.shield.optoutstudies.enabled" = false;
-          "identity.fxaccounts.enabled" = false;
+    profiles = 
+      let 
+        defaultProfile = {
+          settings = {
+            "app.update.auto" = false;
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "signon.rememberSignons" = false;
+            "browser.startup.page" = 3;
+            "app.shield.optoutstudies.enabled" = false;
+            "identity.fxaccounts.enabled" = false;
 
-          # From https://www.privacytools.io/browsers/
-          "privacy.firstparty.isolate" = true;
-          "privacy.resistFingerprinting" = true;
-          "privacy.trackingprotection.fingerprinting.enabled" = true;
-          "privacy.trackingprotection.cryptomining.enabled" = true;
-          "privacy.trackingprotection.enabled" = true;
+            # From https://www.privacytools.io/browsers/
+            "privacy.firstparty.isolate" = true;
+            "privacy.resistFingerprinting" = true;
+            "privacy.trackingprotection.fingerprinting.enabled" = true;
+            "privacy.trackingprotection.cryptomining.enabled" = true;
+            "privacy.trackingprotection.enabled" = true;
 
-          "browser.send_pings" = false;
-          "browser.urlbar.speculativeConnect.enabled" = false;
-          "dom.event.clipboardevents.enabled" = false;
-          "media.navigator.enabled" = false; # Camera and microphone status
-          "network.cookie.cookieBehavior" = 1;
-          "network.http.referer.XOriginPolicy" = 2;
-          "network.http.referer.XOriginTrimmingPolicy" = 2;
-          "browser.sessionstore.privacy_level" = 2;
-          "beacon.enabled" = false;
+            "browser.send_pings" = false;
+            "browser.urlbar.speculativeConnect.enabled" = false;
+            "dom.event.clipboardevents.enabled" = false;
+            "media.navigator.enabled" = false; # Camera and microphone status
+            "network.cookie.cookieBehavior" = 1;
+            "network.http.referer.XOriginPolicy" = 2;
+            "network.http.referer.XOriginTrimmingPolicy" = 2;
+            "browser.sessionstore.privacy_level" = 2;
+            "beacon.enabled" = false;
 
-          "network.dns.disablePrefetch" = true;
-          "network.dns.disablePrefetchFromHTTPS" = true;
-          "network.predictor.enabled" = false;
-          "network.predictor.enable-prefetch" = false;
-          "network.prefetch-next" = false;
+            "network.dns.disablePrefetch" = true;
+            "network.dns.disablePrefetchFromHTTPS" = true;
+            "network.predictor.enabled" = false;
+            "network.predictor.enable-prefetch" = false;
+            "network.prefetch-next" = false;
 
-          "network.IDN_show_punycode" = true;
+            "network.IDN_show_punycode" = true;
+          };
+          userChrome = ''
+            /* hides the native tabs */
+            #TabsToolbar {
+              visibility: collapse;
+            }
+          '';
         };
-        userChrome = ''
-          /* hides the native tabs */
-          #TabsToolbar {
-            visibility: collapse;
-          }
-        '';
+      in 
+      {
+        home = defaultProfile // {
+          id = 0;
+        };
+        };
       };
-    };
   };
 
   systemd.user.startServices = true;

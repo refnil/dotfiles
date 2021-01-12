@@ -131,7 +131,7 @@ in
   ];
 
   services.udev = {
-    extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
+    #extraRules = builtins.readFile "${kaleidoscope_src}/etc/99-kaleidoscope.rules";
   };
   #options.hardware.steam-hardware.enable = true;
   boot.kernelModules = [ "uinput" ];
