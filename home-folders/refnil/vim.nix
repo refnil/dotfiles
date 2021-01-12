@@ -68,6 +68,7 @@ with pkgs;
     plugins = with vimPlugins; config.programs.vim.plugins ++ [
       # Language Server Protocol
       coc-nvim
+      coc-rls
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -236,7 +237,8 @@ with pkgs;
               "haskell"
             ]
           }
-        }
+        },
+        "rust-client.disableRustup": true,
       }
     '';
   };

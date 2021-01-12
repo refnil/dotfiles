@@ -43,6 +43,8 @@ in
     tomb
     remmina
 
+    peek # Gif recorder
+
     gparted
 
     vlc
@@ -207,5 +209,6 @@ in
     mergeSets = foldl' (l: r: l // r) {};
     rcfilesAutoSet = mergeSets (map (name: fileToHomeSet {filename = name; filetype = getAttr name dir;}) dirNames);
   in rcfilesAutoSet // {
+    ".tmate.conf".text = config.home.file.".tmux.conf".text;
   };
 } 
