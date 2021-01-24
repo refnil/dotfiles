@@ -153,7 +153,7 @@ in
 
             # From https://www.privacytools.io/browsers/
             "privacy.firstparty.isolate" = true;
-            "privacy.resistFingerprinting" = true;
+            #"privacy.resistFingerprinting" = true; # Break some website with custom font or video
             "privacy.trackingprotection.fingerprinting.enabled" = true;
             "privacy.trackingprotection.cryptomining.enabled" = true;
             "privacy.trackingprotection.enabled" = true;
