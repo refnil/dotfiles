@@ -61,6 +61,7 @@ in
 
     # Gaming
     unstable.steam
+    unstable.steam-run
     unstable.discord
     vassal
     #unstable.lutris

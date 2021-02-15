@@ -65,5 +65,7 @@
   documentation.info.enable = false;
 
   programs.bcc.enable = true;
+
+  environment.systemPackages = [ pkgs.gnomeExtensions.gsconnect ];
 }
 

@@ -30,7 +30,7 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
   
   networking.hostName = "overmind"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -126,6 +126,15 @@ in
 
     #Steam link
     27031 27036 #27015
+  ];
+
+  # GSConnect 
+  networking.firewall.allowedUDPPortRanges = [
+    { from = 1716; to = 1764; }
+  ];
+
+  networking.firewall.allowedTCPPortRanges = [
+    { from = 1716; to = 1764; }
   ];
 
   services.udev = {
