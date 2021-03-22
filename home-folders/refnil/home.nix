@@ -68,6 +68,7 @@ in
     # Nix stuff
     nix-top # Explore running nix build
     nox # pull request review for nixos
+    nix-index
 
     # Software to help with direnv
     nur.repos.kalbasit.nixify 
