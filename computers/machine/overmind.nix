@@ -92,6 +92,7 @@ in
     useSubstitutes = true;
   };
 
+  /*
   services.nextcloud = {
     enable = false;
     hostName = "localhost";
@@ -100,6 +101,7 @@ in
       adminpassFile = "/data/nextcloud/password";
     };
   };
+  */
 
   services.no-ip = {
     enable = false;
@@ -111,30 +113,32 @@ in
   networking.firewall.allowedTCPPorts = [ 
     443
 
-    8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
-    8080 
+    # 8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
+    # 8080 
 
     #Steam link https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
-    27036 27037 #27015
+    # 27036 27037 #27015
 
-    24800 # Barrier
+    # 24800 # Barrier
+
+    30004
   ];
 
   networking.firewall.allowedUDPPorts = [ 
     # Civ 6 ports
-    62056 62900 62901 34197
+    # 62056 62900 62901 34197
 
     #Steam link
-    27031 27036 #27015
+    # 27031 27036 #27015
   ];
 
   # GSConnect 
   networking.firewall.allowedUDPPortRanges = [
-    { from = 1716; to = 1764; }
+    # { from = 1716; to = 1764; }
   ];
 
   networking.firewall.allowedTCPPortRanges = [
-    { from = 1716; to = 1764; }
+    # { from = 1716; to = 1764; }
   ];
 
   services.udev = {
