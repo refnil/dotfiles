@@ -78,7 +78,7 @@ in
     unstable.steam
     extra-steam.run
     # unstable.steam-run
-    unstable.discord
+    (unstable.discord.override { nss = nss_latest; })
     vassal
     #unstable.lutris
 
