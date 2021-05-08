@@ -33,7 +33,7 @@ in
     barrier # Share keyboard and mouse via the network
 
     bat # "Better" cat
-    python3
+    (python3.withPackages (ps: with ps; [flake8 autopep8]))
     mosh
     tmate
 

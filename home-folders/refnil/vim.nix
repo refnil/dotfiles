@@ -74,6 +74,8 @@ with pkgs;
       coc-json
       coc-css
       coc-html
+
+      coc-python # Should switch to coc-jedi or coc-pyright eventually
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -245,7 +247,9 @@ with pkgs;
           }
         },
         "rust-client.disableRustup": true,
-        "eslint.format.enable": true
+        "eslint.format.enable": true,
+        "python.linting.flake8Enabled": true,
+        "python.linting.pylintEnabled": false
       }
     '';
   };
