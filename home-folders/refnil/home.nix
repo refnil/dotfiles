@@ -34,7 +34,6 @@ in
 
   home.packages = [
     git
-    gitAndTools.git-annex
     lsof
     unzip
     ripgrep
@@ -44,26 +43,21 @@ in
     libreoffice
     calibre
     killall
-    fd
+    fd # Alternative to find
     barrier # Share keyboard and mouse via the network
 
     bat # "Better" cat
-    bup
-    python3Full
-    glances
+    python3
     mosh
     tmate
-    pass
-    tomb
-    remmina
 
     peek # Gif recorder
+    asciinema
 
     gparted
 
     vlc
     mr
-    taskell
 
     # Nix stuff
     nix-top # Explore running nix build
@@ -71,7 +65,6 @@ in
     nix-index
 
     # Software to help with direnv
-    nur.repos.kalbasit.nixify 
     niv.niv
 
     # Gaming
@@ -79,7 +72,7 @@ in
     extra-steam.run
     # unstable.steam-run
     (unstable.discord.override { nss = nss_latest; })
-    vassal
+    # vassal
     #unstable.lutris
 
     # Gnome 
@@ -210,13 +203,6 @@ in
 
   systemd.user.startServices = true;
   services.lorri.enable = true;
-
-  xdg.mimeApps = {
-    enable = false;
-    defaultApplications = {
-      "application/x-keepass" = "keepass.desktop";
-    };
-  };
 
   home.file = with builtins;
   let 
