@@ -9,20 +9,6 @@ let
 
   niv = import sources.niv {};
   extra-firefox-addons = import ./firefox-addons;
-
-  extra-steam = unstable.steam.override {
-      nativeOnly = true;
-      extraPkgs = pkgs: [
-        # Loop Heroe
-        openssl
-        nghttp2
-        libidn2
-        rtmpdump
-        libpsl
-        libkrb5
-        openldap
-      ];
-    };
 in
 {
   imports = [ 
@@ -69,8 +55,7 @@ in
 
     # Gaming
     unstable.steam
-    extra-steam.run
-    # unstable.steam-run
+    unstable.steam-run
     (unstable.discord.override { nss = nss_latest; })
     # vassal
     #unstable.lutris
