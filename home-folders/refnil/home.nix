@@ -138,11 +138,24 @@ in
   programs.man.enable = true;
 
   programs.ssh.enable = true;
-  programs.termite = {
+
+  programs.kitty = {
     enable = true;
-    clickableUrl = true;
-    mouseAutohide = true;
-    colorsExtra = builtins.readFile "${sources.gruvbox-contrib.outPath}/termite/gruvbox-dark";
+    extraConfig =
+    let theme = fetchurl {
+           url = "https://raw.githubusercontent.com/dexpota/kitty-themes/fca3335489bdbab4cce150cb440d3559ff5400e2/themes/gruvbox_dark.conf";
+           sha256 = "1il8jbq7xkdqz789jc1b0hxcdg5d5h1hl5x2m6rgmy4yg55p7cws";
+          };
+    in ''
+      include ${theme}
+
+      # show single underline when hovering the mouse over URL
+      url_style single
+      open_url_modifiers ctrl
+
+      # Hide mouse on keypress
+      mouse_hide_wait -1
+    '';
   };
 
   programs.firefox = {
