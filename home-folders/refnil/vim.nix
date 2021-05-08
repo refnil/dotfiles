@@ -11,8 +11,8 @@ with pkgs;
       set number relativenumber
       set nu rnu
       set expandtab
-      set tabstop=2
-      set shiftwidth=2
+      set tabstop=4
+      set shiftwidth=4
 
       let mapleader = ','
 
@@ -69,6 +69,11 @@ with pkgs;
       # Language Server Protocol
       coc-nvim
       coc-rls
+
+      coc-eslint
+      coc-json
+      coc-css
+      coc-html
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -240,6 +245,7 @@ with pkgs;
           }
         },
         "rust-client.disableRustup": true,
+        "eslint.format.enable": true
       }
     '';
   };
