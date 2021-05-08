@@ -85,28 +85,53 @@ in
   };
   programs.tmux = {
     enable = true;
-    extraConfig = (builtins.readFile ./submodules/tmuxrc/tmux.conf);
+    shortcut = "a";
     sensibleOnTop = true;
+    keyMode = "vi";
+    historyLimit = 10000;
+    escapeTime = 1;
+    clock24 = true;
+    baseIndex = 1;
+    terminal = "screen-256color";
+    newSession = true;
+    extraConfig = ''
+      # Splitting panes.
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+
+      # New windows
+      bind c new-window -c "#{pane_current_path}"
+
+      # Moving between panes.
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+
+      # switch panes using Alt-arrow without prefix
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
+
+      # Pane resizing.
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
+
+      # Moveing between windows.
+      # Provided you've mapped your `CAPS LOCK` key to the `CTRL` key,
+      # you can now move between panes without moving your hands off the home row.
+      bind -r C-h select-window -t :-
+      bind -r C-l select-window -t :+
+
+      # Enable mouse mode
+      set -g mouse on
+    '';
     plugins = with tmuxPlugins; [
       vim-tmux-navigator
       gruvbox
-      /*
-      {
-        plugin = resurrect;
-        extraConfig = ''
-          set -g @resurrect-strategy-vim 'session'
-          set -g @resurrect-strategy-nvim 'session'
-          set -g @resurrect-capture-pane-contents 'on'
-        '';
-      }
-      {
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5'
-        '';
-      }
-      */
     ];
   };
   programs.htop.enable = true;
