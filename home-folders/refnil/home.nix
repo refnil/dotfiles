@@ -141,6 +141,20 @@ in
 
   programs.kitty = {
     enable = true;
+    font = {
+      name = "Hasklig";
+      package = hasklig;
+    };
+    settings = {
+      enable_audio_bell = false;
+      update_check_interval = 0;
+      clipboard_control = "write-clipboard write-primary no-append";
+      # show single underline when hovering the mouse over URL
+      url_style = "single";
+      open_url_modifiers = "ctrl";
+      # Hide mouse on keypress
+      mouse_hide_wait = -1;
+    };
     extraConfig =
     let theme = fetchurl {
            url = "https://raw.githubusercontent.com/dexpota/kitty-themes/fca3335489bdbab4cce150cb440d3559ff5400e2/themes/gruvbox_dark.conf";
@@ -148,13 +162,6 @@ in
           };
     in ''
       include ${theme}
-
-      # show single underline when hovering the mouse over URL
-      url_style single
-      open_url_modifiers ctrl
-
-      # Hide mouse on keypress
-      mouse_hide_wait -1
     '';
   };
 
