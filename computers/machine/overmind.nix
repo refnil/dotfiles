@@ -21,6 +21,8 @@ in
       ../../services/tiddlywiki
 
       ../services/sage.nix
+
+      ../services/dns
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -193,7 +195,7 @@ in
      };
   in 
   {
-    enable = true;
+    enable = false;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;

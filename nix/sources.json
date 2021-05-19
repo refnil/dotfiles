@@ -23,6 +23,18 @@
         "url": "https://github.com/rycee/home-manager/archive/2aa20ae969f2597c4df10a094440a66e9d7f8c86.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "hosts": {
+        "branch": "master",
+        "description": "🔒 Consolidating and extending hosts files from several well-curated sources. Optionally pick extensions for porn, social media, and other categories.",
+        "homepage": "",
+        "owner": "StevenBlack",
+        "repo": "hosts",
+        "rev": "74606d0545df8aecc97987714b6ce0c14226923d",
+        "sha256": "0xq8pd644qc0f7zxfl0j4xnz5zbvsmin75vk47d7brw6kan945ry",
+        "type": "tarball",
+        "url": "https://github.com/StevenBlack/hosts/archive/74606d0545df8aecc97987714b6ce0c14226923d.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "kaleidoscope": {
         "branch": "master",
         "description": "Firmware for the Keyboardio Model 01 and other keyboards with AVR or ARM MCUs.",
