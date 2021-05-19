@@ -1,5 +1,6 @@
 { config, pkgs, options, ... }:
-{
+let sources = import ../..;
+in {
   imports = [
     ./unstable.nix
   ];
@@ -47,9 +48,21 @@
   # should.
   system.stateVersion = "20.09"; # Did you read the comment?
 
-  nix.useSandbox = true;
+  nix = {
+    useSandbox = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
+    autoOptimiseStore = true;
+    nixPath = [
+      "nixpkgs=${sources.nixos-stable.outPath}"
+      "nixos-config=/etc/nixos/configuration.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
+  };
   nixpkgs = {
-    pkgs = import (import ../..).nixos-stable {
+    pkgs = import sources.nixos-stable {
       inherit (config.nixpkgs) config;
     };
     config = {
