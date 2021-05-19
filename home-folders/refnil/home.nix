@@ -57,8 +57,6 @@ in
     unstable.steam
     unstable.steam-run
     (unstable.discord.override { nss = nss_latest; })
-    # vassal
-    #unstable.lutris
 
     # Gnome 
     gnome3.gnome-tweak-tool
