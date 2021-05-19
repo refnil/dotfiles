@@ -63,6 +63,9 @@ in
     # Gnome 
     gnome3.gnome-tweak-tool
     gnomeExtensions.sound-output-device-chooser
+
+    obs-studio
+    obs-v4l2sink
   ];
 
   #programs.pywal.enable = true;
@@ -246,4 +249,6 @@ in
   in rcfilesAutoSet // {
     ".tmate.conf".text = config.home.file.".tmux.conf".text;
   };
+
+  xdg.configFile."obs-studio/plugins".source = "${config.home.path}/share/obs/obs-plugins";
 } 

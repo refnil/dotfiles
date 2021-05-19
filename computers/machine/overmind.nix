@@ -31,6 +31,11 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
+  boot.kernelModules = [
+    "v4l2loopback" # create a new webcam from software
+    "uinput" # controller on steam
+  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
   
   networking.hostName = "overmind"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -148,10 +153,9 @@ in
   hardware.steam-hardware.enable = true;
   hardware.xpadneo.enable = true;
 
-  boot.kernelModules = [ "uinput" ];
   services.udev.packages = [
-          pkgs.steamPackages.steam
-              ];
+    pkgs.steamPackages.steam
+  ];
 
   # Pour faire marcher diablo 3
   systemd.extraConfig = ''
