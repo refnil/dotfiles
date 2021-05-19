@@ -77,8 +77,6 @@ in {
   documentation.doc.enable=false;
   documentation.info.enable = false;
 
-  programs.bcc.enable = true;
-
-  environment.systemPackages = [ pkgs.gnomeExtensions.gsconnect ];
+  # programs.bcc.enable = true; # kernel tracing and manipulation programs
 }
 
