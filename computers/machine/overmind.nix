@@ -14,7 +14,6 @@ in
       ../hardware/overmind.nix
 
       ../common/base.nix
-      # ../common/vfio.nix
 
       ../../home-folders/refnil/user.nix
       ../../home-folders/mlapointe/user.nix
