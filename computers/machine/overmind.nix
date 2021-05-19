@@ -7,8 +7,6 @@ let
   sources = import ../..;
   # For keyboardio
   kaleidoscope_src = sources.kaleidoscope.outPath;
-
-  no-ip = pkgs.callPackage ../../packages/no-ip {};
 in
 {
   imports =
@@ -22,7 +20,6 @@ in
       ../../home-folders/mlapointe/user.nix
 
       ../../services/tiddlywiki
-      ../../services/no-ip
 
       ../services/sage.nix
     ];
@@ -97,24 +94,6 @@ in
     useSubstitutes = true;
   };
 
-  /*
-  services.nextcloud = {
-    enable = false;
-    hostName = "localhost";
-    home = "/data/nextcloud";
-    config = {
-      adminpassFile = "/data/nextcloud/password";
-    };
-  };
-  */
-
-  services.no-ip = {
-    enable = false;
-
-    config-file = "/data/no-ip/no-ip.conf";
-    package = no-ip;
-  };
-
   networking.firewall.allowedTCPPorts = [ 
     443
 
@@ -172,33 +151,6 @@ in
   services.grafana = {
     enable = false;
     port = 30006;
-  };
-
-  /*
-  // https://unix.stackexchange.com/questions/421325/wake-on-lan-via-ssh
-  services.wakeonlan.interfaces = [
-    {
-      interface = "enp3s0";
-      method = "unicast";
-    }
-  ];
-  */
-
-  services.factorio = { # auto port udp 34197
-    enable = false;
-    /*
-    package = pkgs.factorio-headless-experimental.overrideDerivation (old: {
-      src = let version = "0.18.21"; in pkgs.fetchurl {
-        name = "factorio_headless_x64-${version}.tar.xz";
-        url = "https://factorio.com/get-download/${version}/headless/linux64";
-        sha256 = "0ywb221yfskmri9v9syiqd96vpz2psgx7v0jgjxp8ysmwfm1mskx";
-      };
-    });
-    */
-    saveName = "FactorioSecret";
-    game-password = "LaTour";
-    requireUserVerification = true;
-    autosave-interval = 5;
   };
 
   services.nginx = 
