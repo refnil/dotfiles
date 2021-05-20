@@ -75,6 +75,14 @@ in
     useSubstitutes = true;
   };
 
+  virtualisation.oci-containers.containers = {
+    "heimdall" = {
+      image = "linuxserver/heimdall";
+      volumes = [ "/data/heimdall:/config" ];
+      ports = [ "30009:80" ];
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 
     # 443
 
@@ -187,6 +195,7 @@ in
       #(makeHosts "chat" 30003)
       (makeHosts "git" "localhost:30004")
       #(makeHosts "hydra" 30005)
+      (makeHosts "hub" "localhost:30009")
       remove-default-server
     ]) virtualHosts upstreams;
   };
