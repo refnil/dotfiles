@@ -55,35 +55,15 @@ in
   services.refnil.tiddlywiki = {
     enable = true;
     path = "/data/tiddlywiki";
-    pathPrefix = "/wiki";
     listenAddress = "127.0.0.1";
     httpPort = 30001;
   };
 
-  /*
-  containers.sage = {
-    autoStart = true;
-    config = import ../services/sage.nix;
-    extraFlags = ["-U"];
-    privateNetwork = true;
-    hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.11";
-    forwardPorts = [ { hostPort = 30002; } ];
-  };
-  */
-
   services.gitea = {
     enable = true;
     httpPort = 30004;
-    rootUrl = "http://%(DOMAIN)s:%(HTTP_PORT)s/";
+    rootUrl = "http://git.refnil.ca/";
     stateDir = "/data/gitea";
-  };
-
-  services.mattermost = {
-    enable = false;
-    statePath = "/data/mattermost";
-    siteUrl = "http://localhost:30003";
-    listenAddress = ":30003";
   };
 
   services.hydra = {
@@ -96,7 +76,7 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 
-    443
+    # 443
 
     # 8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     # 8080 
@@ -105,8 +85,6 @@ in
     # 27036 27037 #27015
 
     # 24800 # Barrier
-
-    30004
   ];
 
   networking.firewall.allowedUDPPorts = [ 
@@ -156,32 +134,20 @@ in
 
   services.nginx = 
   let
-     makeHosts = name: port: 
-     let
-       upstreamName = "localhost:${toString port}";
-       backendURL = "http://${upstreamName}/";
-       upstreamURL = "http://${name}/";
-
-       proxyURL  = "http://localhost:${toString port}/${name}/";
-     in
+     makeHosts = name: proxy:
      {
        virtualHosts = {
-         "${name}.localhost" = {
-           locations."/" = {
-             return = "301 http://localhost/${name}/";
-           };
-         };
-         "localhost" = {
-           locations."/${name}/" = {
-             proxyPass = proxyURL;
-             proxyWebsockets = true;
-           };
+         "${name}.refnil.ca" = {
+            locations."/" = {
+              proxyPass = "http://${name}";
+              proxyWebsockets = true;
+            };
          };
        };
        upstreams = {
          "${name}" = {
            servers = {
-             "${upstreamName}" = {};
+             "${proxy}" = {};
            };
          };
        };
@@ -193,20 +159,35 @@ in
        };
        */
      };
+     /*
+     server {
+    }
+    */
+    remove-default-server =  {
+      virtualHosts = {
+        "_" = {
+          extraConfig = ''
+            deny all;
+            return 444;
+          '';
+        };
+      };
+    };
   in 
   {
-    enable = false;
+    enable = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
     inherit (with builtins; foldl' lib.attrsets.recursiveUpdate {} [
-      (makeHosts "wiki" 30001)
-      (makeHosts "sage" 30002)
+      (makeHosts "wiki" "localhost:30001")
+      (makeHosts "sage" "localhost:30002")
       #(makeHosts "chat" 30003)
-      (makeHosts "git" 30004)
+      (makeHosts "git" "localhost:30004")
       #(makeHosts "hydra" 30005)
+      remove-default-server
     ]) virtualHosts upstreams;
   };
 }

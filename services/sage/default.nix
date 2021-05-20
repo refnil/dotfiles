@@ -34,6 +34,11 @@ in {
       type = types.package;
       default = pkgs.sage;
     };
+
+    hostname = mkOption {
+      type = types.str;
+      default = "";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -44,8 +49,17 @@ in {
       preStart = ''
           mkdir -p ${cfg.path}/jupyter
       '';
-      script = ''
-          ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter ${optionalString (cfg.baseURL != "") "--NotebookApp.base_url=${cfg.baseURL}"}
+      script = let 
+        confFile = pkgs.writeText "jupyter-conf.py" ''
+          ${optionalString (cfg.baseURL != "")
+          "c.NotebookApp.base_url = ${cfg.baseURL}"
+          }
+          ${optionalString (cfg.hostname != "")
+          "c.NotebookApp.local_hostnames = ['localhost', '${cfg.hostname}']"
+          }
+        '';
+      in ''
+          ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter  --config=${confFile}
       '';
     };
 
