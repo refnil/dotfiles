@@ -42,10 +42,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ cfg.httpPort ];
     systemd.services.sage = {
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.User = "sage";
+      serviceConfig.User = cfg.userName;
       preStart = ''
           mkdir -p ${cfg.path}/jupyter
       '';
@@ -64,7 +63,7 @@ in {
       '';
     };
 
-    users.extraUsers.sage = {
+    users.extraUsers."${cfg.userName}" = {
       isSystemUser = true;
       useDefaultShell = true;
       home = "${cfg.path}";
