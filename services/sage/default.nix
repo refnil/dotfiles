@@ -57,6 +57,7 @@ in {
           ${optionalString (cfg.hostname != "")
           "c.NotebookApp.local_hostnames = ['localhost', '${cfg.hostname}']"
           }
+          c.NotebookApp.authenticate_prometheus = False
         '';
       in ''
           ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter  --config=${confFile}

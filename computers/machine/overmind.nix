@@ -84,6 +84,7 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 
+    80
     # 443
 
     # 8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
@@ -135,8 +136,32 @@ in
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
 
+  services.prometheus = {
+    enable = true;
+    exporters = {
+      nginx.enable = true;
+      node = {
+        enable = true;
+        enabledCollectors = [ "systemd" ];
+      };
+    };
+
+    scrapeConfigs = [{
+      job_name = "prometheus";
+      scrape_interval = "5s";
+      static_configs = [{
+        targets = [
+          "localhost:9090" # prometheus
+          "localhost:9100" # node exporter
+          "localhost:9113" # nginx
+          "localhost:30002" # jupyter notebook
+        ];
+      }];
+    }];
+  };
+
   services.grafana = {
-    enable = false;
+    enable = true;
     port = 30006;
   };
 
@@ -188,6 +213,7 @@ in
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+    statusPage = true;
 
     inherit (with builtins; foldl' lib.attrsets.recursiveUpdate {} [
       (makeHosts "wiki" "localhost:30001")
@@ -196,6 +222,7 @@ in
       (makeHosts "git" "localhost:30004")
       #(makeHosts "hydra" 30005)
       (makeHosts "hub" "localhost:30009")
+      (makeHosts "grafana" "localhost:30006")
       remove-default-server
     ]) virtualHosts upstreams;
   };
