@@ -49,9 +49,6 @@ in
   # Enable the KDE Desktop Environment.
   #services.xserver.desktopManager.plasma5.enable = true;
 
-  # Set group for sudoers
-  users.extraUsers.refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "networkmanager" ];
-
   services.refnil.tiddlywiki = {
     enable = true;
     path = "/data/tiddlywiki";
@@ -75,13 +72,64 @@ in
     useSubstitutes = true;
   };
 
-  virtualisation.oci-containers.containers = {
+  virtualisation.oci-containers.containers =
+  # https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
+  let extraOptions = [
+        # "--security-opt=no-new-privileges"
+        # "--cap-drop all"
+        # "--icc=false"
+        # "--ulimit nofile=3000"
+        # "--ulimit nproc=10"
+      ];
+  in {
     "heimdall" = {
       image = "linuxserver/heimdall";
+      imageFile = pkgs.dockerTools.pullImage {
+        imageName = "linuxserver/heimdall";
+        imageDigest = "sha256:2f03ab908ca635fbc38800fa7efa8b91f2795f95b83f7344521e01e349b8159f";
+        sha256 = "1yad5yh9m59zd0ssjbpfm7qxisbk4r6gk3ik41s3kr3x2a9niys5";
+        os = "linux";
+        arch = "amd64";
+      };
       volumes = [ "/data/heimdall:/config" ];
       ports = [ "30009:80" ];
+      # inherit extraOptions;
+    };
+    "mealie" = {
+      image = "hkotel/mealie";
+      imageFile = pkgs.dockerTools.pullImage {
+        imageName = "hkotel/mealie";
+        imageDigest = "sha256:b7d576b0bb19112d10d16a0538b9685fe7bcd13df89ede559c476a23567e3da8";
+        sha256 = "1z2b32irap8q586w9k8gxp9ky1nvyb2j8gzsl2f87r2y9zxp3smj";
+        os = "linux";
+        arch = "amd64";
+      };
+      environment = {
+        db_type = "sqlite";
+      };
+      volumes = [ "/data/mealie:/app/data" ];
+      ports = [ "30010:80"];
+      # inherit extraOptions;
     };
   };
+
+  users.extraUsers = {
+    # Set group for sudoers
+    refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "networkmanager" ];
+
+    dockremap = {
+      isSystemUser = true;
+      uid = 10000;
+      group = "dockremap";
+      subUidRanges = [
+        { startUid = 100000; count = 65536; }
+      ];
+      subGidRanges = [
+        { startGid = 100000; count = 65536; }
+      ];
+    };
+  };
+  users.groups.dockremap.gid = 10000;
 
   networking.firewall.allowedTCPPorts = [ 
     80
@@ -133,7 +181,10 @@ in
     DefaultLimitNOFILE=524288
   '';
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--userns-remap=default";
+  };
   virtualisation.libvirtd.enable = true;
 
   services.prometheus = {
@@ -223,6 +274,7 @@ in
       #(makeHosts "hydra" 30005)
       (makeHosts "hub" "localhost:30009")
       (makeHosts "grafana" "localhost:30006")
+      (makeHosts "meal" "localhost:30010")
       remove-default-server
     ]) virtualHosts upstreams;
   };
