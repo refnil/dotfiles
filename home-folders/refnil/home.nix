@@ -20,6 +20,7 @@ in
 
   home.packages = [
     git
+    entr
     lsof
     unzip
     ripgrep
