@@ -107,7 +107,7 @@ in
       environment = {
         db_type = "sqlite";
       };
-      volumes = [ "/data/mealie:/app/data" ];
+      volumes = [ "/data/mealie/:/app/data/" ];
       ports = [ "30010:80"];
       # inherit extraOptions;
     };
@@ -235,18 +235,7 @@ in
            };
          };
        };
-       /*
-       "${name}.refnil.ca" = {
-         onlySSL = true;
-         enableACME = true;
-         inherit locations;
-       };
-       */
      };
-     /*
-     server {
-    }
-    */
     remove-default-server =  {
       virtualHosts = {
         "_" = {

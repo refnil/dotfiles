@@ -27,7 +27,6 @@ in {
     interfaces = [ "0.0.0.0" ];
     forwardAddresses =
       [ "1.0.0.1@853#cloudflare-dns.com" "1.1.1.1@853#cloudflare-dns.com" ];
-      #[ "192.168.1.254"];
     extraConfig = ''
       so-reuseport: yes
       tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
