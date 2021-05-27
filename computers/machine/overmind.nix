@@ -28,7 +28,8 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
+
+  # boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
   boot.kernelModules = [
     "v4l2loopback" # create a new webcam from software
     "uinput" # controller on steam
