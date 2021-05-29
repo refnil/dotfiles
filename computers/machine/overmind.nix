@@ -114,6 +114,10 @@ in
     };
   };
 
+  systemd.services.docker-mealie.serviceConfig = {
+    KillSignal = "SIGKILL";
+  };
+
   users.extraUsers = {
     # Set group for sudoers
     refnil.extraGroups = [ "wheel" "dialout" "docker" "libvirtd" "networkmanager" ];
