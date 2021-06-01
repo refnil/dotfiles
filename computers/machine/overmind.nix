@@ -221,6 +221,8 @@ in
     port = 30006;
   };
 
+  services.tailscale.enable = true;
+
   services.nginx = 
   let
      makeHosts = name: proxy:
