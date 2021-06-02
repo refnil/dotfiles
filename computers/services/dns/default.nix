@@ -23,18 +23,27 @@ in {
 
   services.unbound = {
     enable = true;
-    allowedAccess = [ "127.0.0.0/24" "192.168.1.0/24" ]; # update for your LAN config
-    interfaces = [ "0.0.0.0" ];
-    forwardAddresses =
-      [ "1.0.0.1@853#cloudflare-dns.com" "1.1.1.1@853#cloudflare-dns.com" ];
-    extraConfig = ''
-      so-reuseport: yes
-      tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
-      tls-upstream: yes
-
-      include: "${adblockLocalZones}"
-      include: "${home-domains}"
-    '';
+    settings = {
+      forward-zone = [{
+        name = ".";
+        forward-addr = [
+          "1.0.0.1@853#cloudflare-dns.com"
+          "1.1.1.1@853#cloudflare-dns.com"
+        ];
+      }];
+      server = {
+        interface = [ "0.0.0.0" ];
+        so-reuseport = "yes";
+        tls-upstream = "yes";
+        access-control = [
+          "127.0.0.0/24 allow"
+          "192.168.1.0/24 allow"
+        ];
+        include = [
+          "${adblockLocalZones}"
+          "${home-domains}"
+        ];
+      };
+    };
   };
-
 }

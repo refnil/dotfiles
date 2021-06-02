@@ -39,7 +39,7 @@ in {
       enable = true;
       wayland = false;
     };
-    desktopManager.gnome3.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   # This value determines the NixOS release with which your system is to be
