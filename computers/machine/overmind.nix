@@ -233,6 +233,9 @@ in
               proxyPass = "http://${name}";
               proxyWebsockets = true;
             };
+            forceSSL = true;
+            sslCertificate = "/data/nginx/fullchain.pem";
+            sslCertificateKey = "/data/nginx/privkey.pem";
          };
        };
        upstreams = {
@@ -256,6 +259,7 @@ in
   in 
   {
     enable = true;
+    enableReload = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
