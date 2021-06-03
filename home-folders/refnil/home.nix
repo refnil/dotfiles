@@ -59,20 +59,20 @@ in
     unstable.discord
 
     # Gnome 
-    gnome3.gnome-tweak-tool
-    gnomeExtensions.sound-output-device-chooser
+    gnome.gnome-tweak-tool
+    gnomeExtensions.vitals
+    gnomeExtensions.vertical-overview
+    gnomeExtensions.audio-output-switcher
+    gnomeExtensions.random-wallpaper
 
     obs-studio
     obs-v4l2sink
   ];
 
-  #programs.pywal.enable = true;
-
   programs.fish = {
       enable = true;
   };
 
-  programs.command-not-found.enable = true;
   programs.direnv = {
       enable = true;
       enableFishIntegration = true;
@@ -139,6 +139,7 @@ in
   programs.man.enable = true;
 
   programs.ssh.enable = true;
+  programs.nix-index.enable = true;
 
   programs.kitty = {
     enable = true;
