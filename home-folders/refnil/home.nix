@@ -36,7 +36,6 @@ in
     bat # "Better" cat
     (python3.withPackages (ps: with ps; [flake8 autopep8]))
     mosh
-    tmate
 
     peek # Gif recorder
     asciinema
@@ -57,7 +56,7 @@ in
     # Gaming
     unstable.steam
     unstable.steam-run
-    (unstable.discord.override { nss = nss_latest; })
+    unstable.discord
 
     # Gnome 
     gnome3.gnome-tweak-tool
@@ -246,7 +245,6 @@ in
     mergeSets = foldl' (l: r: l // r) {};
     rcfilesAutoSet = mergeSets (map (name: fileToHomeSet {filename = name; filetype = getAttr name dir;}) dirNames);
   in rcfilesAutoSet // {
-    ".tmate.conf".text = config.home.file.".tmux.conf".text;
   };
 
   xdg.configFile."obs-studio/plugins".source = "${config.home.path}/share/obs/obs-plugins";
