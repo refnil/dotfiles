@@ -230,6 +230,7 @@ in
         home = defaultProfile // {
           id = 0;
         };
+        basic.id = 1;
       };
   };
 
