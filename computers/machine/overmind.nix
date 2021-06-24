@@ -100,8 +100,8 @@ in
       image = "hkotel/mealie";
       imageFile = pkgs.dockerTools.pullImage {
         imageName = "hkotel/mealie";
-        imageDigest = "sha256:b7d576b0bb19112d10d16a0538b9685fe7bcd13df89ede559c476a23567e3da8";
-        sha256 = "1z2b32irap8q586w9k8gxp9ky1nvyb2j8gzsl2f87r2y9zxp3smj";
+        imageDigest = "sha256:3d6b36fb32e632163492c36f7432c877a351d1e7c3b0c82122257d2360bf0d08";
+        sha256 = "1cc2n37jj820vajg8qirms29xik0ncib2yjv821vpypxpj3fkc4f";
         os = "linux";
         arch = "amd64";
       };
