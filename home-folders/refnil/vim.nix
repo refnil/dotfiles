@@ -1,6 +1,9 @@
 { pkgs, config, ...}:
 with pkgs;
-{
+let
+  sources = import ../..;
+  unstable = import sources.nixos-unstable { config = { allowUnfree = true; }; };
+in {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -61,6 +64,7 @@ with pkgs;
   
   programs.neovim = {
     enable = true;
+    package = unstable.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
