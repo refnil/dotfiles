@@ -48,7 +48,6 @@ in {
       vim-gitgutter # git 
       ctrlp-vim # fzf
       #ack
-      rainbow
       vim-tmux-navigator
 
       #Color themes
@@ -68,6 +67,10 @@ in {
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
+    extraPackages = [
+      # Grammars for tree-sitter
+      (tree-sitter.withPlugins (_: tree-sitter.allGrammars))
+    ];
 
     plugins = with vimPlugins; config.programs.vim.plugins ++ [
       # Language Server Protocol
@@ -80,6 +83,8 @@ in {
       coc-html
 
       coc-pyright
+      nvim-treesitter
+      # nvim-ts-rainbow # TODO make this work...
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -244,6 +249,18 @@ in {
         "python.formatting.autopep8Path": "${python3Packages.autopep8}/bin/autopep8"
       }
     '';
-  };
 
+    "nvim/plugin/treesitter.lua".text = ''
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,
+        },
+        rainbow = {
+          enable = true,
+          extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+          max_file_lines = 1000,
+        },
+      }
+    '';
+  };
 }
