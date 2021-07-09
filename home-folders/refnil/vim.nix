@@ -79,7 +79,7 @@ in {
       coc-css
       coc-html
 
-      coc-python # Should switch to coc-jedi or coc-pyright eventually
+      coc-pyright
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -241,7 +241,7 @@ in {
         "rust-client.disableRustup": true,
         "eslint.format.enable": true,
         "python.linting.flake8Enabled": true,
-        "python.linting.pylintEnabled": false
+        "python.formatting.autopep8Path": "${python3Packages.autopep8}/bin/autopep8"
       }
     '';
   };
