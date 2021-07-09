@@ -138,7 +138,7 @@ in
 
   networking.firewall.allowedTCPPorts = [ 
     80
-    # 443
+    443
 
     # 8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     # 8080 
