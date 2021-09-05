@@ -140,6 +140,7 @@ in
     80
     443
 
+    1935
     # 8010 # For Chromecast support on vlc https://github.com/NixOS/nixpkgs/pull/58588
     # 8080 
 
@@ -277,5 +278,19 @@ in
       (makeHosts "meal" "localhost:30010")
       remove-default-server
     ]) virtualHosts upstreams;
+
+    appendConfig = ''
+      rtmp {
+      server {
+                listen 1935;
+                chunk_size 4096;
+
+                application live {
+                        live on;
+                        record off;
+                }
+        }
+      }
+    '';
   };
 }
