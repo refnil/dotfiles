@@ -44,22 +44,20 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.sage = {
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.User = cfg.userName;
+      serviceConfig = {
+        User = cfg.userName;
+        Nice = 15;
+      };
       preStart = ''
           mkdir -p ${cfg.path}/jupyter
       '';
-      script = let 
-        confFile = pkgs.writeText "jupyter-conf.py" ''
-          ${optionalString (cfg.baseURL != "")
-          "c.NotebookApp.base_url = ${cfg.baseURL}"
-          }
-          ${optionalString (cfg.hostname != "")
-          "c.NotebookApp.local_hostnames = ['localhost', '${cfg.hostname}']"
-          }
-          c.NotebookApp.authenticate_prometheus = False
-        '';
-      in ''
-          ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter  --config=${confFile}
+      script = ''
+          ${cfg.package}/bin/sage --notebook=jupyter --no-browser \
+            --NotebookApp.authenticate_prometheus=False \
+            --NotebookApp.local_hostnames=localhost \
+            --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter \
+            ${optionalString (cfg.baseURL != "") "--NotebookApp.base_url=${cfg.baseURL}"} \
+            ${optionalString (cfg.hostname != "") "--NotebookApp.local_hostnames=${cfg.hostname}"} \
       '';
     };
 
