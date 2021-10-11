@@ -49,6 +49,7 @@ in {
   system.stateVersion = "21.05"; # Did you read the comment?
 
   nix = {
+    package = pkgs.nixUnstable;
     useSandbox = true;
     gc = {
       automatic = true;
@@ -60,6 +61,9 @@ in {
       "nixos-config=/etc/nixos/configuration.nix"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
   nixpkgs = {
     pkgs = import sources.nixos-stable {
