@@ -141,6 +141,8 @@ in
   programs.ssh.enable = true;
   programs.nix-index.enable = true;
 
+  programs.zoxide.enable = true;
+
   programs.kitty = {
     enable = true;
     font = {
