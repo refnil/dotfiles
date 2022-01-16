@@ -6,21 +6,33 @@
         "owner": "morhetz",
         "repo": "gruvbox-contrib",
         "rev": "edb3ee5f626cdfb250d5ab42c1f5ccb9f8050514",
-        "sha256": "0n32s5var4xxwk3bwm70mwja0gy6vaj2awm6kji10yw3fpqgg7yh",
+        "sha256": "d09ff7f075837b10a29ca67225a4dac63fa024afe054bec6e4bd93ac76d16258",
         "type": "tarball",
         "url": "https://github.com/morhetz/gruvbox-contrib/archive/edb3ee5f626cdfb250d5ab42c1f5ccb9f8050514.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
-        "branch": "release-20.03",
+        "branch": "release-21.05",
         "description": "Manage a user environment using Nix",
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "318bc0754ed6370cfcae13183a7f13f7aa4bc73f",
-        "sha256": "0hgn85yl7gixw1adjfa9nx8axmlpw5y1883lzg3zigknx6ff5hsr",
+        "rev": "49695f33aac22358b59e49c94fe6472218e5d766",
+        "sha256": "e7ea952d8bdf3aba298cb02fa50b3f00fb43f1e6271086c077d6b7ea518764cd",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/318bc0754ed6370cfcae13183a7f13f7aa4bc73f.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/49695f33aac22358b59e49c94fe6472218e5d766.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "hosts": {
+        "branch": "master",
+        "description": "🔒 Consolidating and extending hosts files from several well-curated sources. Optionally pick extensions for porn, social media, and other categories.",
+        "homepage": "",
+        "owner": "StevenBlack",
+        "repo": "hosts",
+        "rev": "74606d0545df8aecc97987714b6ce0c14226923d",
+        "sha256": "3e1792ac9a86e775da2173976363d57bfdf26d271250d7ff718061424cbb0877",
+        "type": "tarball",
+        "url": "https://github.com/StevenBlack/hosts/archive/74606d0545df8aecc97987714b6ce0c14226923d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "kaleidoscope": {
@@ -29,10 +41,10 @@
         "homepage": "http://keyboard.io",
         "owner": "keyboardio",
         "repo": "kaleidoscope",
-        "rev": "902a60ab7f4f83128756df94609aef50ad3b4adb",
-        "sha256": "1zzrsy5a8vxqw6zfi7gzfmbznm60ww6wfjpn9gyb886sjp5hcrkc",
+        "rev": "34bb24a7f1c60bbd393b8b6c1b5480a3bc93d2fb",
+        "sha256": "1930427fe0ec3fd9a3f6776fb49bde13c0add5f5f0abf912cd408c49b46d67d9",
         "type": "tarball",
-        "url": "https://github.com/keyboardio/kaleidoscope/archive/902a60ab7f4f83128756df94609aef50ad3b4adb.tar.gz",
+        "url": "https://github.com/keyboardio/kaleidoscope/archive/34bb24a7f1c60bbd393b8b6c1b5480a3bc93d2fb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -41,22 +53,22 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "e82eb322ea32a747a51c431d7787221bcc6d9038",
-        "sha256": "1fy4dcr05d80diwlxmh42xnjm5ki1pkbky38smvlqjaky2y2f71f",
+        "rev": "65a61b147f307d24bfd0a5cd56ce7d7b7cc61d2e",
+        "sha256": "103f061bf19f66db780c97f12526e28fc943aab1a6e9eb8411dcf3d2f5cdb19e",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/e82eb322ea32a747a51c431d7787221bcc6d9038.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/65a61b147f307d24bfd0a5cd56ce7d7b7cc61d2e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-stable": {
-        "branch": "nixos-20.03",
+        "branch": "nixos-21.05",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
-        "repo": "nixpkgs-channels",
-        "rev": "fc966732c89f9485a1ea1a0f86b2a1bb97db862c",
-        "sha256": "0wajslwdxcb4cji5zzxj2ns0ai6s5nz646xv9894mayy4yln329r",
+        "repo": "nixpkgs",
+        "rev": "83667ff60a88e22b76ef4b0bdf5334670b39c2b6",
+        "sha256": "0i3cl781909mshwh9f5k94z81ixmfk0k4427afajwm6lr2hgp4kp",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs-channels/archive/fc966732c89f9485a1ea1a0f86b2a1bb97db862c.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/83667ff60a88e22b76ef4b0bdf5334670b39c2b6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable": {
@@ -65,10 +77,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e7d1b6b59b9d4697d192a270468dad6cb8de9227",
-        "sha256": "1nrp88qn0v1idqknyhhna99gr2jnqzv854d6rqc3s67snfwildf0",
+        "rev": "96a99266450b0d25d40049693971cb699cfeaa5e",
+        "sha256": "19lda9jv6pdmiybzh5z7rgq859rg0wrrxh061cv4j5642ywcmc41",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/e7d1b6b59b9d4697d192a270468dad6cb8de9227.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/96a99266450b0d25d40049693971cb699cfeaa5e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -77,10 +89,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "414a81af5e13c2809be65b104f50f71cbfebdab2",
-        "sha256": "1yb1f47pi6pq721rpmllqndbwd4v1zv95h3hganlq7bv5kma1fad",
+        "rev": "f2205c2b0c2d681f9345dfaef206709d7eaee8df",
+        "sha256": "1c2b6b3ap6m9438fm9g0822qk1vpfrymvs296ya8blirvbxcanvl",
         "type": "tarball",
-        "url": "https://github.com/nix-community/nur/archive/414a81af5e13c2809be65b104f50f71cbfebdab2.tar.gz",
+        "url": "https://github.com/nix-community/nur/archive/f2205c2b0c2d681f9345dfaef206709d7eaee8df.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

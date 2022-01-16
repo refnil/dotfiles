@@ -1,20 +1,22 @@
 { pkgs, config, ...}:
 with pkgs;
-{
+let
+  sources = import ../..;
+  unstable = import sources.nixos-unstable { config = { allowUnfree = true; }; };
+in {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
   programs.vim = {
-    enable = true;
-    settings = {
-      relativenumber = true;
-      number = true;
-      expandtab = true;
-      tabstop = 2;
-      shiftwidth = 2;
-    };
+    enable = false;
     extraConfig = ''
+      set number relativenumber
+      set nu rnu
+      set expandtab
+      set tabstop=4
+      set shiftwidth=4
+
       let mapleader = ','
 
       set softtabstop=0 smarttab 
@@ -46,7 +48,6 @@ with pkgs;
       vim-gitgutter # git 
       ctrlp-vim # fzf
       #ack
-      rainbow
       vim-tmux-navigator
 
       #Color themes
@@ -62,12 +63,31 @@ with pkgs;
   
   programs.neovim = {
     enable = true;
+    package = unstable.neovim-unwrapped;
     viAlias = true;
+    vimAlias = true;
     withNodeJs = true;
+    extraPackages = [
+      # Grammars for tree-sitter
+      (tree-sitter.withPlugins (_: tree-sitter.allGrammars))
+    ];
 
     plugins = with vimPlugins; config.programs.vim.plugins ++ [
       # Language Server Protocol
       coc-nvim
+      coc-rls
+
+      coc-eslint
+      coc-json
+      coc-css
+      coc-html
+
+      coc-pyright
+      nvim-treesitter
+      # nvim-ts-rainbow # TODO make this work...
+
+      git-blame-nvim
+      # nvim-ts-autotag # Could be cool for html/js/react
     ];
 
     extraConfig = config.programs.vim.extraConfig + ''
@@ -79,7 +99,8 @@ with pkgs;
       set nowritebackup
 
       " Give more space for displaying messages.
-      set cmdheight=2
+      " Line under the statusline
+      set cmdheight=1
 
       " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
       " delays and poor user experience.
@@ -219,26 +240,30 @@ with pkgs;
       {
         "languageserver": {
           "haskell": {
-            "command": "ghcide",
-            "args": [
-              "--lsp"
-            ],
-            "rootPatterns": [
-              ".stack.yaml",
-              ".hie-bios",
-              "BUILD.bazel",
-              "cabal.config",
-              "package.yaml"
-            ],
-            "filetypes": [
-              "hs",
-              "lhs",
-              "haskell"
-            ]
+            "command": "haskell-language-server-wrapper",
+            "args": ["--lsp"],
+            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+            "filetypes": ["haskell", "lhaskell"]
           }
-        }
+        },
+        "rust-client.disableRustup": true,
+        "eslint.format.enable": true,
+        "python.linting.flake8Enabled": true,
+        "python.formatting.autopep8Path": "${python3Packages.autopep8}/bin/autopep8"
+      }
+    '';
+
+    "nvim/plugin/treesitter.lua".text = ''
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,
+        },
+        rainbow = {
+          enable = true,
+          extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+          max_file_lines = 1000,
+        },
       }
     '';
   };
-
 }

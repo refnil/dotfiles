@@ -1,5 +1,6 @@
 { config, pkgs, options, ... }:
-{
+let sources = import ../..;
+in {
   imports = [
     ./unstable.nix
   ];
@@ -9,7 +10,7 @@
   ];
   
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "Europe/Paris";
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -38,18 +39,35 @@
       enable = true;
       wayland = false;
     };
-    desktopManager.gnome3.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 
-  nix.useSandbox = true;
+  nix = {
+    # package = pkgs.nixUnstable;
+    useSandbox = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
+    autoOptimiseStore = true;
+    nixPath = [
+      "nixpkgs=${sources.nixos-stable.outPath}"
+      "nixos-config=/etc/nixos/configuration.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
+    # add flake in options if you want
+    # extraOptions = ''
+      # experimental-features = nix-command
+    # '';
+  };
   nixpkgs = {
-    pkgs = import (import ../..).nixos-stable {
+    pkgs = import sources.nixos-stable {
       inherit (config.nixpkgs) config;
     };
     config = {
@@ -60,4 +78,10 @@
   boot.supportedFilesystems = [ "ntfs" ];
   boot.cleanTmpDir = true;
   boot.tmpOnTmpfs = true;
+
+  documentation.doc.enable=false;
+  documentation.info.enable = false;
+
+  # programs.bcc.enable = true; # kernel tracing and manipulation programs
 }
+

@@ -34,22 +34,34 @@ in {
       type = types.package;
       default = pkgs.sage;
     };
+
+    hostname = mkOption {
+      type = types.str;
+      default = "";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ cfg.httpPort ];
     systemd.services.sage = {
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.User = "sage";
+      serviceConfig = {
+        User = cfg.userName;
+        Nice = 15;
+      };
       preStart = ''
           mkdir -p ${cfg.path}/jupyter
       '';
       script = ''
-          ${cfg.package}/bin/sage --notebook=jupyter --no-browser --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter ${optionalString (cfg.baseURL != "") "--NotebookApp.base_url=${cfg.baseURL}"}
+          ${cfg.package}/bin/sage --notebook=jupyter --no-browser \
+            --NotebookApp.authenticate_prometheus=False \
+            --NotebookApp.local_hostnames=localhost \
+            --ip=${cfg.listenAddress} --port=${toString cfg.httpPort} --notebook-dir=${cfg.path}/jupyter \
+            ${optionalString (cfg.baseURL != "") "--NotebookApp.base_url=${cfg.baseURL}"} \
+            ${optionalString (cfg.hostname != "") "--NotebookApp.local_hostnames=${cfg.hostname}"} \
       '';
     };
 
-    users.extraUsers.sage = {
+    users.extraUsers."${cfg.userName}" = {
       isSystemUser = true;
       useDefaultShell = true;
       home = "${cfg.path}";

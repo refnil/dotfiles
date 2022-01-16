@@ -1,3 +1,0 @@
-[submodule "home-folders/refnil/submodules/tmuxrc"]
-	path = home-folders/refnil/submodules/tmuxrc
-	url = git@github.com:refnil/tmuxrc.git

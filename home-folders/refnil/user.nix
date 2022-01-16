@@ -10,6 +10,7 @@
       ./pub_keys/id_saladin.pub
       ./pub_keys/id_aiur.pub
       ./pub_keys/id_phone.pub
+      ./pub_keys/house.pub
     ];
   };
 }
