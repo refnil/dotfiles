@@ -2,6 +2,6 @@
 NEW_NIXPKGS=$(nix-instantiate --eval -E "(import ~/dotfiles).nixpkgs.outPath")
 NEW_NIXPKGS="${NEW_NIXPKGS%\"}"
 NEW_NIXPKGS="${NEW_NIXPKGS#\"}"
-nix-shell -p "(import (import ../..).home-manager {}).home-manager " --run "home-manager -f home.nix -I nixpkgs=$NEW_NIXPKGS switch"
+nix-shell -p "(import (import ../..).home-manager {}).home-manager " --run "home-manager -f home.nix -I nixpkgs=$NEW_NIXPKGS switch -b backup"
 mkdir -p ~/.config/nixpkgs
 ln -sf `pwd`/home.nix ~/.config/nixpkgs/home.nix

@@ -37,6 +37,14 @@
   services.xserver.libinput.enable = true;
   services.xserver.libinput.clickMethod = "clickfinger";
 
+  services.xserver.desktopManager = {
+    lxqt.enable = true;
+    # mate.enable = true;
+    # pantheon.enable = true;
+    # plasma5.enable = true;
+    xfce.enable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.refnil = {
     extraGroups = [ "wheel" "networkmanager" ];
@@ -46,12 +54,28 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    };
+  };
 
   environment.variables = {
-      MESA_LOADER_DRIVER_OVERRIDE = "iris";
-    };
-    hardware.opengl.package = (pkgs.mesa.override {
-      galliumDrivers = [ "nouveau" "virgl" "swrast" "iris" ];
-    }).drivers;
+    # MESA_LOADER_DRIVER_OVERRIDE = "iris";
+  };
+  # hardware.opengl.package = (pkgs.mesa.override {
+  #   galliumDrivers = [ "nouveau" "virgl" "swrast" "iris" ];
+  # }).drivers;
+  hardware.opengl.extraPackages = with pkgs; [
+    # https://nixos.org/manual/nixos/stable/index.html#sec-gpu-accel-opencl-intel
+    intel-compute-runtime 
+    beignet
+
+    # https://nixos.wiki/wiki/Accelerated_Video_Playback
+    intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    vaapiVdpau
+    libvdpau-va-gl
+  ];
 }

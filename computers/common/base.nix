@@ -10,7 +10,7 @@ in {
   ];
   
   # Set your time zone.
-  time.timeZone = "Europe/Paris";
+  time.timeZone = "America/Halifax";
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -52,7 +52,7 @@ in {
     # package = pkgs.nixUnstable;
     useSandbox = true;
     gc = {
-      automatic = true;
+      automatic = false;
       options = "--delete-older-than 30d";
     };
     autoOptimiseStore = true;

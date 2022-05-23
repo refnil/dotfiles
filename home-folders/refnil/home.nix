@@ -66,7 +66,6 @@ in
     gnomeExtensions.random-wallpaper
 
     obs-studio
-    obs-v4l2sink
   ];
 
   programs.fish = {

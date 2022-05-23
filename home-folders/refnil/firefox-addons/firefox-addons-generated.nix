@@ -2,10 +2,10 @@
   {
     "tree-style-tab" = buildFirefoxXpiAddon {
       pname = "tree-style-tab";
-      version = "3.8.13";
+      version = "3.8.19";
       addonId = "treestyletab@piro.sakura.ne.jp";
-      url = "https://addons.mozilla.org/firefox/downloads/file/3848403/tree_style_tab-3.8.13-fx.xpi";
-      sha256 = "25766bec2ba97c3299883316bf3662b03b5f796245d0aeaef8f50d7aa17d1a1c";
+      url = "https://addons.mozilla.org/firefox/downloads/file/3892754/tree_style_tab-3.8.19-fx.xpi";
+      sha256 = "fdcaf0e7b28e369ef04f3584f7abd28174557bf05cc90ac9d290046ef1821396";
       meta = with lib;
       {
         homepage = "http://piro.sakura.ne.jp/xul/_treestyletab.html.en";
