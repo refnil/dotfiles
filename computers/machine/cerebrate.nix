@@ -47,7 +47,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.refnil = {
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker"];
   };
 
   # This value determines the NixOS release with which your system is to be
@@ -78,4 +78,8 @@
     vaapiVdpau
     libvdpau-va-gl
   ];
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.podman.enable = true;
+  virtualisation.docker.enable = true;
 }

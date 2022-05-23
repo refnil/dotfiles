@@ -86,7 +86,7 @@ in {
       nvim-treesitter
       # nvim-ts-rainbow # TODO make this work...
 
-      git-blame-nvim
+      # git-blame-nvim
       # nvim-ts-autotag # Could be cool for html/js/react
     ];
 
