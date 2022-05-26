@@ -3,8 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
-{
+let sources = import ../..;
+    hardware = sources.nixos-hardware;
+in {
   imports =
     [ # Include the results of the hardware scan.
       ../hardware/cerebrate.nix
@@ -12,6 +13,10 @@
       ../common/base.nix
 
       ../../home-folders/refnil/user.nix
+
+      "${hardware}/common/cpu/intel"
+      "${hardware}/common/pc/laptop"
+      "${hardware}/common/pc/laptop/ssd"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -56,11 +61,14 @@
   # should.
   nixpkgs.config = {
     allowUnfree = true;
+    /*
     packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
     };
+    */
   };
 
+  /*
   environment.variables = {
     # MESA_LOADER_DRIVER_OVERRIDE = "iris";
   };
@@ -82,4 +90,5 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.podman.enable = true;
   virtualisation.docker.enable = true;
+  */
 }
